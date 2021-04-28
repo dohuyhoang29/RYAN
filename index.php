@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +8,9 @@
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Creative - Bootstrap Admin Template</title>
+  <title>Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +35,79 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+<style>
+    * {box-sizing: border-box;}
+    body {font-family: Verdana, sans-serif;}
+    .mySlides {display: none;}
+    img {vertical-align: middle;}
+
+    /* Slideshow container */
+    .slideshow-container {
+    float: right;
+    width: 87%;
+    height: 60%;
+    position: relative;
+    margin: auto;
+    }
+    
+    /* Caption text */
+    .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    }
+
+    .active {
+    background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+    animation-name: fade;
+    animation-duration: 3s;
+    }
+
+    @-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+    }
+
+    @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+    }
+
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+    .text {font-size: 11px}
+    }
+</style>
   
 </head>
 
@@ -50,7 +122,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo"><img style="padding-bottom: 10px;" src="img/logo1.svg" alt=""></a>
+      <a href="index.php" class="logo"><img style="padding-bottom: 10px;" src="img/logo1.svg" alt=""></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -69,13 +141,13 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          
-          <li class="dropdown">
+        
+          <!-- <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar01.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username"></span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">
@@ -83,10 +155,16 @@
               <li class="eborder-top">
                 
               <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
               </li>
               
             </ul>
+          </li> -->
+          <!-- <li>
+            <?php include('shareadminMenu.php'); ?>
+          </li> -->
+          <li>
+            <a href="login.php"><i class="icon_key_alt"></i></a>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -97,11 +175,11 @@
 
     <!--sidebar start-->
     <aside>
-      <div id="sidebar" class="nav-collapse ">
+      <div id="sidebar" class="nav-collapse " >
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
+            <a class="" href="index.php">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
@@ -120,16 +198,17 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="basic_table.html">Admin</a></li>
+              <li><a class="" href="Admin.php">Admin</a></li>
               <li><a class="" href="basic_table.html">Service</a></li>
               <li><a class="" href="basic_table.html">Categories</a></li>
-              <li><a class="" href="basic_table.html">Pictures</a></li>
+              <li><a class="" href="Pictures.php">Pictures</a></li>
             </ul>
           </li>
 
           
 
         </ul>
+
         <!-- sidebar menu end-->
       </div>
     </aside>
@@ -146,12 +225,70 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
         </div>
       </div>
     </section>
     <!--main content end-->
   </section>
+
+  <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          <div class="numbertext"></div>
+          <img src="img/a1.jpg" style="width:100%">
+
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext"></div>
+          <img src="img/a2.jpg" style="width:100%">
+
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext"></div>
+          <img src="img/a4.jpg" style="width:100%">
+
+        </div>
+
+        <!-- <div class="mySlides fade">
+          <div class="numbertext"></div>
+          <img src="imgs/a4.jpg" style="width:100%">
+
+        </div> -->
+
+      </div>
+        <br>
+
+        <div style="text-align:center">
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+        </div>
+
+  <script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}    
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+      setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+  </script>
+
   <!-- container section start -->
 
   <!-- javascripts -->
