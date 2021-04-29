@@ -1,0 +1,74 @@
+<?php
+require_once('Pictures/DatabasePicture.php');
+require_once('initialize.php');
+
+if ($_SERVER["REQUEST_METHOD"] == 'POST'){
+    //db delete
+    Delete_Picture($_POST['PictureID']);
+    redirect_to('Pictures.php');
+} else { // form loaded
+    if(!isset($_GET['PictureID'])) {
+        redirect_to('Pictures.php');
+    }
+    $pictureID = $_GET['PictureID'];
+    $picture = find_picture_by_id($pictureID);
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Delete Picture</title>
+    <style>
+        .label {
+            font-weight: bold;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <?php if(!isset($_SESSION['username'])):
+        redirect_to('Admin/LoginRYAN.php');
+    endif;?>
+   <h1>Delete Picture</h1>
+    <h2>Are you sure you want to delete this Picture?</h2>
+    <p><span class="label">Name: </span><?php echo $picture['Name']; ?></p>
+    <p><span class="label">ServiceID: </span><?php echo $picture['ServiceID']; ?></p>
+    <p><span class="label">URL: </span><?php echo $picture['URL']; ?></p>
+    <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+        <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID']; ?>" >
+     
+        <input type="submit" name="submit" value="Delete Picture">
+
+<br><br>
+            <!-- <label class="control-label col-xs-1">Name:</label>
+            <div class="col-xs-2">
+                <button class="form-control"><?php echo $picture['Name']; ?></button>
+            </div>
+
+            <br><br>
+            <label class="control-label col-xs-1">ServiceID:</label>
+            <div class="col-xs-2">
+                <button class="form-control"><?php echo $picture['ServiceID']; ?></button>
+            </div>
+
+            <br><br>
+            <label class="control-label col-xs-1">URL:</label>
+            <div class="col-xs-2">
+                <button class="form-control"><?php echo $picture['URL']; ?></button>
+            </div>
+            <br><br> -->
+     
+    </form>
+    
+    <br><br>
+    <a href="IndexPicture.php">Back to Index Picture </a>
+</body>
+</html>
+
+
+<?php
+db_disconnect($db);
+?>

@@ -1,3 +1,8 @@
+<?php
+    require_once('Categories/DatabaseCategories.php');
+    require_once('initialize.php'); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +39,7 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-
+  
 </head>
 
 <body>
@@ -44,8 +49,7 @@
 
     <header class="header dark-bg">
       <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i
-            class="icon_menu"></i></div>
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
 
       <!--logo start-->
@@ -68,23 +72,23 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-
+          
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="profile-ava">
-                <img alt="" src="img/avatar01.jpg">
-              </span>
-              <span class="username">Jenifer Smith</span>
-              <b class="caret"></b>
-            </a>
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar01.jpg">
+                            </span>
+                            <span class="username">Jenifer Smith</span>
+                            <b class="caret"></b>
+                        </a>
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
-
+                
               <li>
                 <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
               </li>
-
+              
             </ul>
           </li>
           <!-- user login dropdown end -->
@@ -94,6 +98,7 @@
     </header>
     <!--header end-->
 
+    
     <!--sidebar start-->
     <aside>
       <div id="sidebar" class="nav-collapse ">
@@ -101,39 +106,32 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="index.html">
-              <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
-            </a>
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
           </li>
+          <li class="active">
+            <a class="" href="form_validation.html">
+                          <i class="icon_document_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+          </li>
+          
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
+                          <i class="icon_table"></i>
+                          <span>Tables</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
+            <li><a class="" href="admin.php">Admin</a></li>
+              <li><a class="" href="service.php">Service</a></li>
+              <li><a class="" href="categories.php">Categories</a></li>
+              <li><a class="" href="pictures.php">Pictures</a></li>
             </ul>
           </li>
 
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Tables</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="basic_table.html">Admin</a></li>
-              <li><a class="" href="basic_table.html">Service</a></li>
-              <li><a class="" href="basic_table.html">Categories</a></li>
-              <li><a class="" href="basic_table.html">Pictures</a></li>
-            </ul>
-          </li>
-
-
+          
 
         </ul>
         <!-- sidebar menu end-->
@@ -143,7 +141,7 @@
 
     <!--main content start-->
     <section id="main-content">
-
+      
       <div class="text-right">
         <div class="credits">
           <!--
@@ -157,6 +155,51 @@
       </div>
     </section>
     <!--main content end-->
+    <section id="main-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Advanced Table
+              </header>
+  
+              <table class="table table-striped table-advance table-hover">
+                <tbody>
+                  <!-- <tr>
+                    <th><i class="icon_profile"></i> Full Name</th>
+                    <th><i class="icon_calendar"></i> Date</th>
+                    <th><i class="icon_mail_alt"></i> Email</th>
+                    <th><i class="icon_pin_alt"></i> City</th>
+                    <th><i class="icon_mobile"></i> Mobile</th>
+                    <th><i class="icon_cogs"></i> Action</th>
+                  </tr> -->
+                  <?php  
+                     $categories_set = find_all_categories();
+                     $count = mysqli_num_rows($categories_set);
+                     for ($i = 0; $i < $count; $i++):
+                     $categories = mysqli_fetch_assoc($categories_set); 
+                  ?>
+
+                  <tr>
+                    <td><?php echo $categories['Name']; ?></td>
+                  <td>
+                      <div class="btn-group">
+                        <a class="btn btn-primary" href="Categories/NewCategories.php"><i class="icon_plus_alt2"></i></a>
+                        <a class="btn btn-success" href="<?php echo 'EditCategories.php?CategoryID='.$categories['CategoryID']; ?>"><i class="icon_check_alt2"></i></a>
+                        <a class="btn btn-danger" href="<?php echo 'DeleteCategories.php?CategoryID='.$categories['CategoryID']; ?>"><i class="icon_close_alt2"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <?php 
+                  endfor; 
+                  mysqli_free_result($categories_set);
+                  ?>       
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </section>
   </section>
   <!-- container section start -->
 
@@ -176,8 +219,7 @@
   <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="js/fullcalendar.min.js">
-    </script>
+  <<script src="js/fullcalendar.min.js"></script>
     <!-- Full Google Calendar - Calendar -->
     <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
@@ -204,16 +246,16 @@
     <script src="js/jquery.slimscroll.min.js"></script>
     <script>
       //knob
-      $(function () {
+      $(function() {
         $(".knob").knob({
-          'draw': function () {
+          'draw': function() {
             $(this.i).val(this.cv + '%')
           }
         })
       });
 
       //carousel
-      $(document).ready(function () {
+      $(document).ready(function() {
         $("#owl-slider").owlCarousel({
           navigation: true,
           slideSpeed: 300,
@@ -225,12 +267,12 @@
 
       //custom select box
 
-      $(function () {
+      $(function() {
         $('select.styled').customSelect();
       });
 
       /* ---------- Map ---------- */
-      $(function () {
+      $(function() {
         $('#map').vectorMap({
           map: 'world_mill_en',
           series: {
@@ -241,7 +283,7 @@
             }]
           },
           backgroundColor: '#eef3f7',
-          onLabelShow: function (e, el, code) {
+          onLabelShow: function(e, el, code) {
             el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
           }
         });
@@ -251,3 +293,7 @@
 </body>
 
 </html>
+
+<?php   
+    db_disconnect($db);
+?>
