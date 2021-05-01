@@ -122,7 +122,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo"><img style="padding-bottom: 10px;" src="img/logo1.svg" alt=""></a>
+      <a href="home.php" class="logo"><img style="padding-bottom: 10px;" src="img/L.png" alt=""></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -143,29 +143,27 @@
 
 
           <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
               <span class="profile-ava">
                 <img alt="" src="img/avatar01.jpg">
               </span>
-              <span class="username">Jenifer Smith</span>
+              <span class="username"><?php include('shareadminMenu.php'); ?></span>
               <b class="caret"></b>
-            </a>
+            </a> -->
             <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
 
-              <li>
-                <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
-              </li>
+              <!-- <li>
+                <a href="../Admin/login.php"><i class="icon_key_alt"></i> Log Out</a>
+              </li> -->
 
             </ul>
-          </li> -->
-          <!-- <li>
-            <?php include('shareadminMenu.php'); ?>
-          </li> -->
-          <li>
-            <a href="login.php"><i class="icon_key_alt"></i></a>
           </li>
+          <?php include('shareadminMenu.php'); ?>
+          <!-- <li>
+            <a href="Admin/login.php"><i class="icon_key_alt"></i></a>
+          </li> -->
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
@@ -179,7 +177,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
+            <a class="" href="home.php">
               <i class="icon_house_alt"></i>
               <span>Dashboard</span>
             </a>
@@ -205,7 +203,7 @@
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
-                <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Admin/IndexAdmin.php">Admin</a></li>
+                <li><a class="" href="Admin/IndexAdmin.php">Admin</a></li>
               <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Service/IndexService.php">Service</a></li>
               <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Pictures/IndexPicture.php">Pictures</a></li>
               <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Categories/IndexCategories.php">Categories</a></li>
@@ -243,19 +241,19 @@
 
         <div class="mySlides fade">
           <div class="numbertext"></div>
-          <img src="img/a1.jpg" style="width:100%">
+          <img src="img/bong_da1.jpg" style="width:100%">
 
         </div>
 
         <div class="mySlides fade">
           <div class="numbertext"></div>
-          <img src="img/a2.jpg" style="width:100%">
+          <img src="img/bong_da2.jpg" style="width:100%">
 
         </div>
 
         <div class="mySlides fade">
           <div class="numbertext"></div>
-          <img src="img/a4.jpg" style="width:100%">
+          <img src="img/bong_da4.jpg" style="width:100%">
 
         </div>
 

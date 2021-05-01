@@ -34,16 +34,16 @@ function isFormValidated(){
   <title>Login Page </title>
 
   <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="../css/bootstrap-theme.css" rel="stylesheet">
   <!--external css-->
   <!-- font icon -->
-  <link href="css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="css/font-awesome.css" rel="stylesheet" />
+  <link href="../css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="../css/font-awesome.css" rel="stylesheet" />
   <!-- Custom styles -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/style-responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -51,7 +51,7 @@ function isFormValidated(){
 
   <div class="container">
 
-    <form class="login-form" action="index.php">
+    <form class="login-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
@@ -93,7 +93,7 @@ function isFormValidated(){
               $Login = find_usenmae($username);
               if($Login['Password'] === sha1($_POST['password'])){
                   $_SESSION['username'] = $username;
-                  redirect_to('home.php');
+                  redirect_to('../home.php');
                   // echo "Ban Da Dang Nhap Thanh Cong";
               }else{
                   echo "Username or Password wrong!";

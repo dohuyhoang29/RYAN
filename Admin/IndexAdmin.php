@@ -1,6 +1,6 @@
 <?php
-    require_once('Admin/DatabaseRYAN.php');
-    require_once('initialize.php');
+require_once('DatabaseAdmin.php');
+require_once('../initialize.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,16 +16,16 @@
   <title>Admin</title>
 
   <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="../css/bootstrap-theme.css" rel="stylesheet">
   <!--external css-->
   <!-- font icon -->
-  <link href="css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="../css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/style-responsive.css" rel="stylesheet" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
   <!--[if lt IE 9]>
@@ -34,7 +34,7 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
 
-    <!-- =======================================================
+  <!-- =======================================================
       Theme Name: NiceAdmin
       Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
       Author: BootstrapMade
@@ -43,9 +43,9 @@
 </head>
 
 <body>
-<?php if(!isset($_SESSION['username'])):
-  redirect_to('login.php');
-  endif;?>
+  <!-- <?php if (!isset($_SESSION['username'])) :
+          redirect_to('login.php');
+        endif; ?> -->
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -55,7 +55,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo">Nice <span class="lite">Admin</span></a>
+      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -74,8 +74,8 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-        <li>
-            <a href="login.php"><i class="icon_key_alt"></i></a>
+          <li>
+            <?php include('../shareadminMenu.php'); ?>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -90,35 +90,44 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="">
-            <a class="" href="index.php">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
+            <a class="" href="../home.php">
+              <i class="icon_house_alt"></i>
+              <span>Dashboard</span>
+            </a>
           </li>
-          <li class="active">
-            <a class="" href="form_validation.html">
-                          <i class="icon_document_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
-          </li>
-          
-  
-
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
-              <li><a class="" href="Admin.php">Admin</a></li>
-              <li><a class="" href="basic_table.html">Service</a></li>
-              <li><a class="" href="basic_table.html">Categories</a></li>
-              <li><a class="" href="Pictures.php">Pictures</a></li>
+              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/NewService.php">Service</a></li>
+              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
+              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
             </ul>
           </li>
 
-          
+
+
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+              <i class="icon_table"></i>
+              <span>Tables</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+              <li><a class="" href="IndexAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/IndexService.php">Service</a></li>
+              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
+              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
+            </ul>
+          </li>
+
+
+
+
 
         </ul>
         <!-- sidebar menu end-->
@@ -127,73 +136,82 @@
 
     <!--main content start-->
     <section id="main-content">
-      <div class="row">
-        <div class="col-lg-12">
-          <section class="panel">
-            <header class="panel-heading">
-              Advanced Table
-            </header>
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
+              <li><i class="icon_document_alt"></i>Table</li>
+              <li><i class="fa fa-files-o"></i>Index Admin</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <table class="table table-striped table-advance table-hover">
+                <tbody>
+                  <tr>
+                    <th><i class="icon_profile"></i> User Name</th>
+                    <th><i class="icon_calendar"></i> Password</th>
+                    <th><i class="icon_mail_alt"></i> Full Name</th>
 
-            <table class="table table-striped table-advance table-hover">
-              <tbody>
-                <tr>
-                  <th><i class="icon_profile"></i> User Name</th>
-                  <th><i class="icon_calendar"></i> Password</th>
-                  <th><i class="icon_mail_alt"></i> Full Name</th>
-                  <th><i class="icon_pin_alt"></i> email</th>
-                  <th><i class="icon_mobile"></i> Phone</th>
-                  <th><i class="icon_cogs"></i> Edit</th>
-                  <th><i class="icon_cogs"></i> Delete</th>
-                </tr>
-                <?php
+                    <th><i class="icon_mobile"></i> Phone</th>
+                    <th><i class="icon_pin_alt"></i> email</th>
+                  </tr>
+                  <?php
                   $admin_set = find_all_admin();
                   $count = mysqli_num_rows($admin_set);
-                  for($i = 0; $i < $count; $i++):
+                  for ($i = 0; $i < $count; $i++) :
                     $admin = mysqli_fetch_assoc($admin_set);
-                ?>
-
-                <tr>
-                  <td><?php echo $admin['username'];?></td>
-                  <td><?php echo $admin['pass'];?></td>
-                  <td><?php echo $admin['fullname'];?></td>
-                  <td><?php echo $admin['phone'];?></td>
-                  <td><?php echo $admin['email'];?></td>
-                  <td>
-                    <div class="btn-group">
-                      <a class="btn btn-primary" href="RegistrationRYAN.php"><i class="icon_plus_alt2"></i></a>
-                      <a class="btn btn-success" href="<?php echo 'EditRYAN.php?username='.$admin['username']; ?>"><i class="icon_check_alt2"></i></a>
-                      <a class="btn btn-danger" href="<?php echo 'DeleteRYAN.php?username='.$admin['username']; ?>"><i class="icon_close_alt2"></i></a>
-                    </div>
-                  </td>
-                </tr>
-
-                <?php
+                  ?>
+                    <tr>
+                      <td><?php echo $admin['username']; ?></td>
+                      <td><?php echo $admin['pass']; ?></td>
+                      <td><?php echo $admin['fullname']; ?></td>
+                      <td><?php echo $admin['phone']; ?></td>
+                      <td><?php echo $admin['email']; ?></td>
+                      <td>
+                        <div class="btn-group">
+                          <a class="btn btn-primary" href="NewAdmin.php"><i class="icon_plus_alt2"></i></a>
+                          <a class="btn btn-success" href="<?php echo 'EditRYAN.php?username=' . $admin['username']; ?>"><i class="icon_check_alt2"></i></a>
+                          <a class="btn btn-danger" href="<?php echo 'DeleteRYAN.php?username=' . $admin['username']; ?>"><i class="icon_close_alt2"></i></a>
+                        </div>
+                      </td>
+                    </tr>
+                  <?php
                   endfor;
                   mysqli_free_result($admin_set);
-                ?>
-                
-              </tbody>
-            </table>
-          </section>
+                  ?>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </div>
-      </div>
+      </section>
     </section>
     <!--main content end-->
   </section>
   <!-- container section end -->
   <!-- javascripts -->
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <!-- nicescroll -->
-  <script src="js/jquery.scrollTo.min.js"></script>
-  <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <!-- nice scroll -->
+  <script src="../js/jquery.scrollTo.min.js"></script>
+  <script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
+  <!-- jquery validate js -->
+  <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+
+  <!-- custom form validation script for this page-->
+  <script src="../js/form-validation-script.js"></script>
   <!--custome script for all page-->
-  <script src="js/scripts.js"></script>
+  <script src="../js/scripts.js"></script>
 
 
 </body>
 
 </html>
 <?php
-    db_disconnect($db);
+db_disconnect($db);
 ?>
