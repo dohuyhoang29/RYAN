@@ -165,9 +165,13 @@ require_once('../initialize.php');
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="username" class="control-label col-lg-2">Categories <span class="required">*</span></label>
+                      <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="username" name="CategoryID" type="text" />
+                        <select class="form-control " id="password" name="CategoryID">
+                          <option value="1" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
+                          <option value="2" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
+                          <option value="3" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group ">

@@ -162,7 +162,7 @@
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="fullname" type="text" />
+                        <input class=" form-control" id="fullname" name="fullname" type="text" value=""/>
                       </div>
                     </div>
                     <div class="form-group ">

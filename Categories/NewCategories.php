@@ -80,6 +80,7 @@
           <!-- user login dropdown start-->
           <li class="dropdown">
           <li>
+            <p class="fa fa-user-o"></p>
             <?php include('../sharesession.php'); ?> 
           </li>
             

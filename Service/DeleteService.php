@@ -1,18 +1,18 @@
 <?php
-    require_once('../Service/DatabaseService.php');
-    require_once('../initialize.php'); 
+require_once('../Service/DatabaseService.php');
+require_once('../initialize.php');
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        delete_service($_POST['ServiceID']);
-        redirect_to('service.php');
-    } else {
-        if(!isset($_GET['ServiceID'])){
-            redirect_to('service.php');
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  delete_service($_POST['ServiceID']);
+  redirect_to('service.php');
+} else {
+  if (!isset($_GET['ServiceID'])) {
+    redirect_to('service.php');
+  }
 
-        $serviceID = $_GET['ServiceID'];
-        $service = find_service_by_id($serviceID);
-    }
+  $serviceID = $_GET['ServiceID'];
+  $service = find_service_by_id($serviceID);
+}
 ?>
 
 
@@ -52,7 +52,7 @@
   <link href="../css/style-responsive.css" rel="stylesheet" />
   <link href="../css/xcharts.min.css" rel=" stylesheet">
   <link href="../css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -67,7 +67,7 @@
 
       <!--logo start-->
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-    <!--logo end-->
+      <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
         <!--  search form start -->
@@ -85,16 +85,16 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          
+
           <li class="dropdown">
-            
-            
-                
-              <li>
-              <?php include('../shareadminMenu.php'); ?>
-              </li>
-              
-           
+
+
+
+          <li>
+            <?php include('../shareadminMenu.php'); ?>
+          </li>
+
+
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -103,7 +103,7 @@
     </header>
     <!--header end-->
 
-    
+
     <!--sidebar start-->
     <aside>
       <div id="sidebar" class="nav-collapse ">
@@ -111,16 +111,16 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="../home.php">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
+              <i class="icon_house_alt"></i>
+              <span>Dashboard</span>
+            </a>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/NewService.php">Service</a></li>
@@ -128,13 +128,13 @@
               <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
             </ul>
           </li>
-          
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_table"></i>
+              <span>Tables</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/IndexService.php">Service</a></li>
@@ -143,7 +143,7 @@
             </ul>
           </li>
 
-          
+
 
         </ul>
         <!-- sidebar menu end-->
@@ -153,59 +153,68 @@
 
     <!--main content start-->
     <section id="main-content">
-      
+
       <div class="text-right">
         <div class="credits">
-       
+
         </div>
       </div>
     </section>
     <!--main content end-->
     <section id="main-content">
-    <div class="row">
+      <section class="wrapper">
+        <div class="row">
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
               <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Delete Service</li>
+              <li><i class="fa fa-files-o"></i>Edit Admin</li>
             </ol>
           </div>
         </div>
+        <br>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <section class="panel">
-  
-              <table class="table table-striped table-advance table-hover">
-                <tbody>
-                  <!-- <tr>
-                    <th><i class="icon_profile"></i> Full Name</th>
-                    <th><i class="icon_calendar"></i> Date</th>
-                    <th><i class="icon_mail_alt"></i> Email</th>
-                    <th><i class="icon_pin_alt"></i> City</th>
-                    <th><i class="icon_mobile"></i> Mobile</th>
-                    <th><i class="icon_cogs"></i> Action</th>
-                  </tr> -->
-                
-                 
-                  <tr><br>
-                    <p>Name: <?php echo $service['Name'] ?></p>
-                    <p>Time: <?php echo $service['Time'] ?></p>
-                    <p>Rules: <?php echo $service['Rules'] ?></p>
-                    <p>Famous Players: <?php echo $service['Famous_Players'] ?></p>
-                    <p>CategoryID: <?php echo $service['CategoryID'] ?></p>
-                  </tr>
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                    <input type="hidden" name="ServiceID" value="<?php echo $service['ServiceID'] ?>">
-                    <input type="submit" name="submit" value="Delete Service">
-                  
-                </tbody>
-              </table>
-            </section>
+        <div class="col-lg-4 col-lg-offset-4">
+          <label class="control-label " id="input-container"></label>
+          <div class="">
+            <button class="form-control"><?php echo $service['Name']; ?></button>
           </div>
+          <label class="control-label " id="input-container"></label>
+          <div class="">
+            <button class="form-control"><?php echo $service['Famous_Players']; ?></button>
+          </div>
+          <label class="control-label " id="input-container"></label>
+          <div class="">
+            <button class="form-control"><?php echo $service['CategoryID']; ?></button>
+          </div>
+          <label class="control-label " id="input-container"></label>
+          <div class="">
+            <button class="form-control"><?php echo $service['Time']; ?></button>
+          </div>
+          <label class="control-label " id="input-container"></label>
+          <div class="form-group ">
+            <label for="phone" class="control-label col-lg-2">Rules <span class="required"></span></label>
+            <div class="col-lg-10">
+              <p class="form-control " id="phone" name="Rules" type="text"><?php echo $service['Rules']?></p>
+            </div>
+          </div>
+
+          <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <input type="hidden" name="username" value="<?php echo $service['ServiceID']; ?>">
+
+            <label class="control-label" id="input-container"></label>
+
+            <div class="col-lg-4 col-lg-offset-4">
+              <button class="form-control" type="submit">Delete</button>
+
+            </div>
+
+
+          </form>
         </div>
       </section>
+    </section>
   </section>
   <!-- container section start -->
 
@@ -225,7 +234,8 @@
   <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="../js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="../js/fullcalendar.min.js"></script>
+  <<script src="../js/fullcalendar.min.js">
+    </script>
     <!-- Full Google Calendar - Calendar -->
     <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
@@ -300,6 +310,6 @@
 
 </html>
 
-<?php   
-    db_disconnect($db);
+<?php
+db_disconnect($db);
 ?>

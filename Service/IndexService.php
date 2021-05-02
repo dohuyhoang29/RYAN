@@ -170,7 +170,6 @@ require_once('../initialize.php');
                     <th>&nbsp;</th>
                     <th>Time</th>
                     <th>Famous Players</th>
-                    <th>Categories</th>
                   </tr>
                   <?php
                   $service_set = find_all_service();
@@ -181,8 +180,6 @@ require_once('../initialize.php');
 
                     <tr>
                       <td><?php echo $service['name']; ?></td>  
-                      <td class="rules"><?php echo $service['Rules']; ?></td>
-                      <td><button onclick="document.write'<?php echo $service['Rules']; ?>'"></button></td>
                       <td><?php echo $service['Time']; ?></td>
                       <td><?php echo $service['Famous_Players']; ?></td>
                       <td><?php echo $service['Name']; ?></td>

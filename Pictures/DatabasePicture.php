@@ -39,7 +39,7 @@ function insert_Picture($Picture) {
     $sql .= "(Name, URL, ServiceID) ";
     $sql .= "VALUES (";
     $sql .= "'" . $Picture['Name'] . "',"; //be careful of single quotes
-    $sql .= "'../imgs/" . $Picture['URL'] . "',";//be careful of single quotes
+    $sql .= "'../img/" . $Picture['URL'] . "',";//be careful of single quotes
     $sql .= "'" . $Picture['ServiceID'] . "'";//be careful of single quotes
     $sql .= ")";
     $result = mysqli_query($db, $sql);

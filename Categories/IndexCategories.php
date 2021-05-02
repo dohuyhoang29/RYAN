@@ -142,58 +142,58 @@ require_once('../initialize.php');
     <!--main content start-->
     <!--main content end-->
     <section id="main-content">
-        <section class="wrapper">
-          <div class="row">
-            <div class="col-lg-12">
-              <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
-              <ol class="breadcrumb">
-                <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                <li><i class="fa fa-table"></i>Table</li>
-                <li><i class="fa fa-th-list"></i>Basic Table</li>
-              </ol>
-            </div>
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-table"></i>Table</li>
+              <li><i class="fa fa-th-list"></i>Basic Table</li>
+            </ol>
           </div>
-          <!-- page start-->
+        </div>
+        <!-- page start-->
 
-          <div class="row">
-            <div class="col-lg-12">
-              <section class="panel">
-                <header class="panel-heading">
-                  Advanced Table
-                </header>
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Advanced Table
+              </header>
 
-                <table class="table table-striped table-advance table-hover">
-                  <tbody>
+              <table class="table table-striped table-advance table-hover">
+                <tbody>
+                  <tr>
+                    <th><i class="icon_profile"></i>Name</th>
+                  </tr>
+                  <?php
+                  $categories_set = find_all_categories();
+                  $count = mysqli_num_rows($categories_set);
+                  for ($i = 0; $i < $count; $i++) :
+                    $categories = mysqli_fetch_assoc($categories_set);
+                  ?>
                     <tr>
-                      <th><i class="icon_profile"></i>Name</th>
+                      <td><?php echo $categories['Name']; ?></td>
+                      <td>
+                        <div class="btn-group" style="float: right;">
+                          <a class="btn btn-primary" href="NewCategories.php"><i class="icon_plus_alt2"></i></a>
+                          <a class="btn btn-success" href="<?php echo 'EditCategories.php?CategoryID=' . $categories['CategoryID']; ?>"><i class="icon_pencil"></i></a>
+                          <a class="btn btn-danger" href="<?php echo 'DeleteCategories.php?CategoryID=' . $categories['CategoryID']; ?>"><i class="icon_close_alt2"></i></a>
+                        </div>
+                      </td>
                     </tr>
-                    <?php
-                    $categories_set = find_all_categories();
-                    $count = mysqli_num_rows($categories_set);
-                    for ($i = 0; $i < $count; $i++) :
-                      $categories = mysqli_fetch_assoc($categories_set);
-                    ?>
-                      <tr>
-                        <td><?php echo $categories['Name']; ?></td>
-                        <td>
-                          <div class="btn-group" style="float: right;">
-                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                            <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                    <?php
-                    endfor;
-                    mysqli_free_result($categories_set);
-                    ?>
-                  </tbody>
-                </table>
-              </section>
-            </div>
+                  <?php
+                  endfor;
+                  mysqli_free_result($categories_set);
+                  ?>
+                </tbody>
+              </table>
+            </section>
           </div>
-          <!-- page end-->
-        </section>
+        </div>
+        <!-- page end-->
+      </section>
     </section>
     <!-- container section start -->
 

@@ -214,13 +214,14 @@ require_once('../initialize.php');
                     ?>
                       <tr>
                         <td><?php echo $picture['Name']; ?></td>
-                        <td class="img"><img src="<?php echo '../img/'.$picture['URL']; ?>"></td>
+                        <td class="img" ><img style="width: 80%; height: 80%;" src="<?php echo $picture['URL']; ?>"></td>
+                        <!-- <td><img src="../img/cau_long1.jpg" alt=""></td> -->
                         <td><?php echo $picture['name']; ?></td>
                         <td>
                           <div class="btn-group" style="float: right;">
-                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                            <a class="btn btn-success" href="#"><i class="icon_pencil"></i></a>
-                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                            <a class="btn btn-primary" href="NewPicture.php"><i class="icon_plus_alt2"></i></a>
+                            <a class="btn btn-success" href="<?php echo 'EditPicture.php?PictureID=' . $picture['PictureID']; ?>"><i class="icon_pencil"></i></a>
+                            <a class="btn btn-danger" href="<?php echo 'DeletePicture.php?PictureID=' . $picture['PictureID']; ?>"><i class="icon_close_alt2"></i></a>
                           </div>
                         </td>
                       </tr>

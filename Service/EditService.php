@@ -1,44 +1,44 @@
 <?php
-    require_once('../Service/DatabaseService.php');
-    require_once('../initialize.php'); 
+require_once('../Service/DatabaseService.php');
+require_once('../initialize.php');
 
-    $error = [];
+$error = [];
 
-    function checkForm(){
-        global $error;
+function checkForm()
+{
+  global $error;
+}
 
-        
-    }
-    
-    function isFormValidated(){
-        global $error;
+function isFormValidated()
+{
+  global $error;
 
-        return count($error) == 0;
-    }
+  return count($error) == 0;
+}
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        checkForm();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  checkForm();
 
-        if(isFormValidated()){
-            $service = [];
-            $service['ServiceID'] = $_POST['ServiceID'];
-            $service['Name'] = $_POST['Name'];
-            $service['Rules'] = $_POST['Rules'];
-            $service['Time'] = $_POST['Time'];
-            $service['Famous_Players'] = $_POST['Famous_Players'];
-            $service['CategoryID'] = $_POST['CategoryID'];
+  if (isFormValidated()) {
+    $service = [];
+    $service['ServiceID'] = $_POST['ServiceID'];
+    $service['Name'] = $_POST['Name'];
+    $service['Rules'] = $_POST['Rules'];
+    $service['Time'] = $_POST['Time'];
+    $service['Famous_Players'] = $_POST['Famous_Players'];
+    $service['CategoryID'] = $_POST['CategoryID'];
 
-            update_service($service);
-            redirect_to('service.php');
-        }
-    } else {
-        if(!isset($_GET['ServiceID'])){
-            redirect_to('service.php');
-        }
+    update_service($service);
+    redirect_to('service.php');
+  }
+} else {
+  if (!isset($_GET['ServiceID'])) {
+    redirect_to('service.php');
+  }
 
-        $serviceID = $_GET['ServiceID'];
-        $service = find_service_by_id($serviceID);
-    }
+  $serviceID = $_GET['ServiceID'];
+  $service = find_service_by_id($serviceID);
+}
 ?>
 
 
@@ -78,7 +78,7 @@
   <link href="../css/style-responsive.css" rel="stylesheet" />
   <link href="../css/xcharts.min.css" rel=" stylesheet">
   <link href="../css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -93,7 +93,7 @@
 
       <!--logo start-->
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-   <!--logo end-->
+      <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
         <!--  search form start -->
@@ -111,10 +111,10 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-        <li>
-      <?php include('../shareadminMenu.php'); ?>
-      </li>
-          
+          <li>
+            <?php include('../shareadminMenu.php'); ?>
+          </li>
+
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
@@ -122,7 +122,7 @@
     </header>
     <!--header end-->
 
-    
+
     <!--sidebar start-->
     <aside>
       <div id="sidebar" class="nav-collapse ">
@@ -130,10 +130,10 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="../home.php">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
-          
+              <i class="icon_house_alt"></i>
+              <span>Dashboard</span>
+            </a>
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_document_alt"></i>
@@ -147,13 +147,13 @@
               <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
             </ul>
           </li>
-          
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_table"></i>
-                          <span>Tables</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_table"></i>
+              <span>Tables</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/IndexService.php">Service</a></li>
@@ -162,7 +162,7 @@
             </ul>
           </li>
 
-          
+
 
         </ul>
         <!-- sidebar menu end-->
@@ -172,7 +172,7 @@
 
     <!--main content start-->
     <section id="main-content">
-      
+
       <div class="text-right">
         <div class="credits">
           <!--
@@ -181,87 +181,86 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-          
+
         </div>
       </div>
     </section>
     <!--main content end-->
     <section id="main-content">
-    <div class="row">
+      <section class="wrapper">
+        <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
+            <h3 class="page-header"><i class="fa fa-user-o"></i> Form Service</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Edit Service</li>
+              <li><i class="fa fa-home"></i><a href="home.php">Home</a></li>
+              <li><i class="icon_document_alt"></i>Forms</li>
+              <li><i class="fa fa-files-o"></i>New Service</li>
             </ol>
           </div>
         </div>
+        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
-  
-              <table class="table table-striped table-advance table-hover">
-                <tbody>
-                  <!-- <tr>
-                    <th><i class="icon_profile"></i> Full Name</th>
-                    <th><i class="icon_calendar"></i> Date</th>
-                    <th><i class="icon_mail_alt"></i> Email</th>
-                    <th><i class="icon_pin_alt"></i> City</th>
-                    <th><i class="icon_mobile"></i> Mobile</th>
-                    <th><i class="icon_cogs"></i> Action</th>
-                  </tr> -->
-                  
-                  <tr>
-    
-         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <input type="hidden" name="ServiceID" value="<?php echo isFormValidated() ? $service['ServiceID'] : $_POST['ServiceID']; ?>">
-
-        <label for="name">Name </label>
-        <input type="text" name="Name" value="<?php echo isFormValidated() ? $service['Name'] : $_POST['Name']; ?>"><br>
-
-        <label for="CategoryID">CategoryID </label>
-        <select name="CategoryID">
-            <option value="1"<?php if(!empty($service['CategoryID']) && $service['CategoryID'] =='1') echo 'selected' ?>>Indoor Sports</option>              
-            <option value="2"<?php if(!empty($service['CategoryID']) && $service['CategoryID'] =='2') echo 'selected' ?>>Outdoor Sports</option>
-            <option value="3"<?php if(!empty($service['CategoryID']) && $service['CategoryID'] =='3') echo 'selected' ?>>Recreation</option>   
-        </select><br>
-            </div>
-        </tr>
-        <select name="CateroryID">
-        <?php
-        $service_set = find_all_service();
-        $count = mysqli_num_rows($service_set);
-        for ($i = 0; $i < $count; $i++):
-            $service = mysqli_fetch_assoc($service_set); 
-        ?>
-            
-            <option 
-            value="<?php echo $service['ServiceID'] ?>" ><?php echo $service['Name'] ?></option>
-        <?php 
-        endfor; 
-        mysqli_free_result($service_set);
-        ?>
-        </select>
-
-        <label for="time">Time </label>
-        <input type="text" name="Time" value="<?php echo isFormValidated() ? $service['Time'] : $_POST['Time']; ?>"><br>
-
-        <label for="famous">Famous Players</label>
-        <input type="text" name="Famous_Players" value="<?php echo isFormValidated() ? $service['Famous_Players'] : $_POST['Famous_Players']; ?>"><br>
-
-        <label for="rules">Rules </label>
-        <textarea name="Rules" cols="30" rows="10"><?php echo isFormValidated() ? $service['Rules'] : $_POST['Rules']; ?></textarea><br>
-
-        <input type="submit" name="submit" value="Edit">
-    </form>
-                </tbody>
-              </table>
+              <header class="panel-heading">
+                Enter Form Admin
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="fullname" name="Name" type="text" value="<?php echo isFormValidated() ? $service['Name'] : $service['Name']; ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <select class="form-control " id="password" name="CategoryID">
+                          <option value="1" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
+                          <option value="2" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
+                          <option value="3" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Time <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="password" name="Time" type="text" value="<?php echo isFormValidated() ? $service['Time'] : $_POST['Time'] ?>"/>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="email" class="control-label col-lg-2">Famous_Players <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="email" name="Famous_Players" type="text" value="<?php echo isFormValidated() ? $service['Famous_Players'] : $_POST['Famous_Players'] ?>"/>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="phone" class="control-label col-lg-2">Rules <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <textarea class="form-control " id="phone" name="Rules" type="text"><?php echo isFormValidated() ? $service['Rules'] : $_POST['Rules'] ?></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-primary" type="submit" value="submit" name="submit">Save</button>
+                        <button class="btn btn-default" type="reset" value="reset" name="reset">Cancel</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </section>
           </div>
         </div>
+        <!-- page end-->
       </section>
+    </section>
+    </div>
+    </div>
+  </section>
   </section>
   <!-- container section start -->
 
@@ -281,7 +280,8 @@
   <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="../js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="../js/fullcalendar.min.js"></script>
+  <<script src="../js/fullcalendar.min.js">
+    </script>
     <!-- Full Google Calendar - Calendar -->
     <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
@@ -356,6 +356,6 @@
 
 </html>
 
-<?php   
-    db_disconnect($db);
+<?php
+db_disconnect($db);
 ?>
