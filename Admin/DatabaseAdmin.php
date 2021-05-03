@@ -112,7 +112,7 @@
         $sql .= "email = '" . $admin['email'] . "', ";
         $sql .= "phone = '" . $admin['phone'] . "', ";
         $sql .= "pass = '" . $admin['pass'] . "'";
-        $sql .= "WHERE username = '" . $admin['USE'] . "' ";
+        $sql .= "WHERE username = '" . $admin['username'] . "' ";
         $sql .= "LIMIT 1;";
 
         $result = mysqli_query($db, $sql);
@@ -124,7 +124,7 @@
         global $db;
 
         $sql = "DELETE FROM admin ";
-        $sql .= "WHERE username='" . $username . "' ";
+        $sql .= "WHERE username='" . $username['username'] . "' ";
         $sql .= "LIMIT 1;";
         $result = mysqli_query($db, $sql);
 

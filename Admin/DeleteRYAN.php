@@ -1,29 +1,84 @@
 <?php
 require_once('DatabaseAdmin.php');
 require_once('../initialize.php');
+$errors = [];
+
+function isFormValidated()
+{
+  global $errors;
+  return count($errors) == 0;
+}
+//alkdjlfajsl;fjas;lkf
+
+function checkForm()
+{
+  global $errors;
+  $username = $_POST['username'];
+  if (empty($_POST['username'])) {
+    $errors[] = 'Username is required';
+  }
+
+  if (!empty($_POST['username']) && find_all_admin_different($username)) {
+    $error[] = 'Username must be different';
+  }
+
+  if (empty($_POST['password'])) {
+    $errors[] = 'Password is required';
+  }
+  if (empty($_POST['fullname'])) {
+    $errors[] = 'fullname is required';
+  }
+  if (empty($_POST['email'])) {
+    $errors[] = 'email is required';
+  }
+
+  if (empty($_POST['phone'])) {
+    $errors[] = 'Phone is required';
+  } else {
+    if (!empty($_POST['phone']) && !is_numeric($_POST['phone']) == 1) {
+      $errors[] = "Phone must be number!";
+    } else {
+      if (!empty($_POST['phone']) && count((str_split($_POST['phone']))) != 10) {
+        $errors[] = 'Phone must have 10 number!';
+      }
+    }
+  }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+  checkForm();
+  if (isFormValidated()) {
 
-  delete_admin($_POST['username']);
-  redirect_to('Admin.php');
-} else {
+    $admin_set = find_ADMIN_by_USE();
+    $ADMIN = mysqli_fetch_assoc($admin_set);
+
+    $admin = [];
+    $admin['USE'] = $ADMIN['username'];
+    $admin['username'] = $_POST['username'];
+    $admin['password'] = sha1($_POST['password']);
+    $admin['fullname'] = $_POST['fullname'];
+    $admin['email'] = $_POST['email'];
+    $admin['phone'] = $_POST['phone'];
+    $admin['pass'] = $_POST['password'];
+
+    Update_admin($admin);
+    redirect_to('IndexAdmin.php');
+  }
+} else { // form loaded
   if (!isset($_GET['username'])) {
-    redirect_to('Admin.php');
+    redirect_to('IndexAdmin.php');
   }
   $username = $_GET['username'];
   $admin = find_admin_by_id($username);
 }
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Delete admin</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <title>Edit admin</title>
+  <meta charset="utf-8">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Delete Admin</title>
+  <title>Edit Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       box-sizing: border-box;
     }
 
-    #input-container {
+    .input-container {
       display: -ms-flexbox;
       /* IE10 */
       display: flex;
@@ -82,14 +137,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       text-align: center;
     }
 
-    /* .col-xs-2{
-    width: 50%;
-    padding: 10px;
-    outline: none;
-    } */
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
 
-
-    .col-xs-2:focus {
+    .input-field:focus {
       border: 2px solid dodgerblue;
     }
 
@@ -100,26 +154,27 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       padding: 15px 20px;
       border: none;
       cursor: pointer;
-      width: 50%;
+      width: 100%;
       opacity: 0.9;
     }
 
-    /* .btn:hover {
-    opacity: 1;
-    } */
+    .btn:hover {
+      opacity: 1;
+    }
+
     .imgcontainer {
       text-align: center;
       margin: 24px 0 12px 0;
     }
 
     img.avatar {
-      width: 18%;
+      width: 40%;
       border-radius: 50%;
     }
 
     body,
     html {
-      height: 100%;
+      height: 110%;
       margin: 0;
     }
 
@@ -138,22 +193,12 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       background-color: white;
     }
   </style>
-</head>
 
 <body>
-  <?php
-  if ($admin['username'] === $_SESSION['username']) {
-    $_SESSION['Delete']; //= 'You cannot delete your name!';
-    redirect_to('IndexRYAN.php');
-  } else {
-    unset($_SESSION['delete']);
-  }
-  ?>
 
   <!-- <?php if (!isset($_SESSION['username'])) :
           redirect_to('LoginRYAN.php');
         endif; ?> -->
-
   <section id="container" class="">
 
 
@@ -163,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       </div>
 
       <!--logo start-->
-      <a href="index.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
+      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -201,7 +246,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           
         </ul>
       </li> -->
-
+          <!-- <li>
+        
+      </li> -->
           <li>
             <?php include('../shareadminMenu.php'); ?>
           </li>
@@ -258,71 +305,98 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <!-- sidebar menu end-->
       </div>
     </aside>
-    <br><br><br>
+
+    <br><br>
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Edit Admin</li>
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="icon_document_alt"></i>Forms</li>
+              <li><i class="fa fa-files-o"></i>New Admin</li>
             </ol>
           </div>
         </div>
-        <div class="imgcontainer">
-          <img src="../img/logo.svg" alt="Avatar" class="avatar">
+        <!-- Form validations -->
+
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Enter Form Admin
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " method="post">
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="fullname" name="fullname" type="text"value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="username" name="username" type="text" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="password" name="password" type="" value="<?php echo isFormValidated() ? $admin['pass'] : $_POST['pass']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="email" name="email" type="email"value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="phone" name="phone" type="text"value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-primary">Save</button>
+
+                      </div>
+                    </div>
+                  </form>
+                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
+                      <?php
+                      $admin = [];
+                      $admin['fullname'] = $_POST['fullname'];
+                      $admin['username'] = $_POST['username'];
+                      $admin['password'] = sha1($_POST['password']);
+                      $admin['email'] = $_POST['email'];
+                      $admin['phone'] = $_POST['phone'];
+
+                      $admin['pass'] = $_POST['password'];
+
+                      $result = insert_admin($admin);
+                      $newadminID = mysqli_insert_id($db);
+                      ?>
+                  <?php endif; ?>
+
+
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
-        <div class="col-lg-8 col-lg-offset-4">
-
-          <a href="IndexAdmin.php" class="btn btn-primary">Back to Index</a>
-
-        </div>
-        <br>
-
-        <div class="col-lg-4 col-lg-offset-4">
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $admin['username']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $admin['pass']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $admin['fullname']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $admin['email']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $admin['phone']; ?></button>
-          </div>
-
-          <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-            <input type="hidden" name="username" value="<?php echo $admin['username']; ?>">
-
-            <label class="control-label" id="input-container"></label>
-
-            <div class="col-lg-4 col-lg-offset-4">
-              <button class="form-control" type="submit">Delete</button>
-
-            </div>
-
-
-          </form>
-        </div>  
+        <!-- page end-->
       </section>
     </section>
-    <br><br>
+
+
+
 
     <br><br>
-
-
     <script src="../js/jquery-2.2.4.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.js"></script>
@@ -340,38 +414,36 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="../js/owl.carousel.js"></script>
     <!-- jQuery full calendar -->
-    <<script src="../js/fullcalendar.min.js">
-      </script>
-      <!-- Full Google Calendar - Calendar -->
-      <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-      <!--script for this page only-->
-      <script src="../js/calendar-custom.js"></script>
-      <script src="../js/jquery.rateit.min.js"></script>
-      <!-- custom select -->
-      <script src="../js/jquery.customSelect.min.js"></script>
-      <script src="../assets/chart-master/Chart.js"></script>
+    <script src="../js/fullcalendar.min.js"></script>
+    <!-- Full Google Calendar - Calendar -->
+    <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="../js/calendar-custom.js"></script>
+    <script src="../js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="../js/jquery.customSelect.min.js"></script>
+    <script src="../assets/chart-master/Chart.js"></script>
 
-      <!--custome script for all page-->
-      <script src="../js/scripts.js"></script>
-      <!-- custom script for this page-->
-      <script src="../js/sparkline-chart.js"></script>
-      <script src="../js/easy-pie-chart.js"></script>
-      <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
-      <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
-      <script src="../js/xcharts.min.js"></script>
-      <script src="../js/jquery.autosize.min.js"></script>
-      <script src="../js/jquery.placeholder.min.js"></script>
-      <script src="../js/gdp-data.js"></script>
-      <script src="../js/morris.min.js"></script>
-      <script src="../js/sparklines.js"></script>
-      <script src="../js/charts.js"></script>
-      <script src="../js/jquery.slimscroll.min.js"></script>
+    <!--custome script for all page-->
+    <script src="../js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="../js/sparkline-chart.js"></script>
+    <script src="../js/easy-pie-chart.js"></script>
+    <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../js/xcharts.min.js"></script>
+    <script src="../js/jquery.autosize.min.js"></script>
+    <script src="../js/jquery.placeholder.min.js"></script>
+    <script src="../js/gdp-data.js"></script>
+    <script src="../js/morris.min.js"></script>
+    <script src="../js/sparklines.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/jquery.slimscroll.min.js"></script>
 
 
 </body>
 
 </html>
-
 
 <?php
 db_disconnect($db);

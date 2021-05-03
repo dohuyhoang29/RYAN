@@ -2,21 +2,42 @@
 require_once('DatabaseCategories.php');
 require_once('../initialize.php');
 
-if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+$errors = [];
 
-  delete_categories($_POST['CategoryID']);
-  redirect_to('IndexCategories.php');
+function isFormValidated()
+{
+  global $errors;
+  return count($errors) == 0;
+}
+
+function checkForm()
+{
+  global $errors;
+  if (empty($_POST['name'])) {
+    $errors[] = "Name must be required.";
+  }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  checkForm();
+  if (isFormValidated()) {
+    //do update
+    $categories = [];
+    $categories['CategoryID'] = $_POST['CategoryID'];
+    $categories['name'] = $_POST['name'];
+
+    delete_categories($categories);
+    redirect_to('IndexCategories.php');
+  }
 } else {
   if (!isset($_GET['CategoryID'])) {
     redirect_to('IndexCategories.php');
   }
-
   $id = $_GET['CategoryID'];
   $categories = find_categories_by_id($id);
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Delete Categoires</title>
+  <title>Edit Categoires</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -91,9 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 
           <li class="dropdown">
-          <li>
-            <?php include('../sharesession.php'); ?>
-          </li>
+            
+            <?php include('../shareadminMenu.php') ?>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -137,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             <ul class="sub">
               <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
+              <li><a class="" href="../Pictures//IndexPicture.php">Pictures</a></li>
               <li><a class="" href="IndexCategories.php">Categories</a></li>
             </ul>
           </li>
@@ -151,49 +171,56 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <!--sidebar end-->
 
     <!--main content start-->
+    <section id="main-content">
 
-    <!--main content end-->
+      <div class="text-right">
+        <div class="credits">
+
+        </div>
+      </div>
+    </section>
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
+            <h3 class="page-header"><i class="fa fa-user-o"></i> Edit Categories</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Edit Admin</li>
+              <li><i class="icon_document_alt"></i>Forms</li>
+              <li><i class="fa fa-files-o"></i>New Categories</li>
             </ol>
           </div>
         </div>
-        <div class="imgcontainer">
-          <img src="../img/logo.svg" alt="Avatar" class="avatar">
-        </div>
-        <div class="col-lg-8 col-lg-offset-4">
-
-          <a href="IndexAdmin.php" class="btn btn-primary">Back to Index</a>
-
-        </div>
-        <br>
-
-        <div class="col-lg-4 col-lg-offset-4">
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $categories['Name']; ?></button>
+        <!-- Form validations -->
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Enter Form Admin
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                    <input type="hidden" name="CategoryID" value="<?php echo $categories['CategoryID']; ?>">
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input disabled class=" form-control" id="fullname" name="name" type="text" value="<?php echo $categories['Name'];?>" />
+                      </div>
+                    </div>
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-default" type="reset">Cancel</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
           </div>
-
-          <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-            <input type="hidden" name="username" value="<?php echo $categories['CategoryID']; ?>">
-
-            <label class="control-label" id="input-container"></label>
-
-            <div class="col-lg-4 col-lg-offset-4">
-              <button class="form-control" type="submit">Delete</button>
-
-            </div>
-
-
-          </form>
-        </div>  
+        </div>
+        <!-- page end-->
       </section>
     </section>
   </section>

@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-user-o"></i> Form Categories</h3>
+            <h3 class="page-header"><i class="fa fa-user-o"></i> Edit Categories</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
               <li><i class="icon_document_alt"></i>Forms</li>
@@ -202,6 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <div class="panel-body">
                 <div class="form">
                   <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                    <input type="hidden" name="CategoryID" value="<?php echo $categories['CategoryID'] ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">

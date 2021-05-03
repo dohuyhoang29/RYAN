@@ -315,6 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                       <label for="username" class="control-label col-lg-2">Picture <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="username" name="URL" type="file" />
+                        <img style="width: 100%; height: 100%;" src="<?php echo $picture['URL']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">

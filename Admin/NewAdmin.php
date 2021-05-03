@@ -1,8 +1,7 @@
 <?php
   require_once('DatabaseAdmin.php');
   require_once('../initialize.php');
-
- 
+  
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Form Validation | Creative - Bootstrap 3 Responsive Admin Template</title>
+  <title>New Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -47,6 +46,9 @@
 
 <body>
   <!-- container section start -->
+  <?php if(!isset($_SESSION['username'])):
+                        redirect_to('login.php');
+                        endif;?>
   <section id="container" class="">
     <!--header start-->
     <header class="header dark-bg">
@@ -158,44 +160,63 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " method="post">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="fullname" type="text" value=""/>
+                        <input class=" form-control" required id="fullname" name="fullname" type="text" >
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="username" name="username" type="text" />
+                        <input class="form-control " required id="username" name="username" type="text" >
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="password" name="password" type="password" />
+                        <input class="form-control " required id="password" name="password" type="password" />
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="email" name="email" type="email" />
+                        <input class="form-control " required id="email" name="email" type="email"  >
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="phone" name="phone" type="text" />
+                        <input class="form-control " required id="phone" name="phone" type="text" >
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" type="reset">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+
                       </div>
                     </div>
                   </form>
+                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST'): ?> 
+                      <div class="error">
+                      <?php 
+                      $admin = [];
+                      $admin['fullname'] = $_POST['fullname'];
+                      $admin['username'] = $_POST['username'];
+                      $admin['password'] = sha1($_POST['password']);
+                      $admin['email'] = $_POST['email'];
+                      $admin['phone'] = $_POST['phone'];
+
+                      $admin['pass'] = $_POST['password'];
+
+                      $result = insert_admin($admin);
+                      $newadminID = mysqli_insert_id($db);
+                      ?>
+                      </div>
+                  <?php endif; ?>
+
+
                 </div>
               </div>
             </section>
@@ -222,22 +243,7 @@
   <!--custome script for all page-->
   <script src="../js/scripts.js"></script>
 
-  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST'): ?> 
-        <div class="error">
-        <?php 
-        $admin = [];
-        $admin['username'] = $_POST['username'];
-        $admin['password'] = sha1($_POST['password']);
-        $admin['fullname'] = $_POST['fullname'];
-        $admin['email'] = $_POST['email'];
-        $admin['phone'] = $_POST['phone'];
-        $admin['pass'] = $_POST['password'];
-
-        $result = insert_admin($admin);
-        $newadminID = mysqli_insert_id($db);
-        ?>
-        </div>
-    <?php endif; ?>
+  
 </body>
 
 </html>

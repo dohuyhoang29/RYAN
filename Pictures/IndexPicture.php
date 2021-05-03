@@ -214,7 +214,7 @@ require_once('../initialize.php');
                     ?>
                       <tr>
                         <td><?php echo $picture['Name']; ?></td>
-                        <td class="img" ><img style="width: 80%; height: 80%;" src="<?php echo $picture['URL']; ?>"></td>
+                        <td class="img" ><img style="width: 100%; height: 100%;" src="<?php echo $picture['URL']; ?>"></td>
                         <!-- <td><img src="../img/cau_long1.jpg" alt=""></td> -->
                         <td><?php echo $picture['name']; ?></td>
                         <td>

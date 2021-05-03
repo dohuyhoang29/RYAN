@@ -98,7 +98,7 @@
         global $db;
 
         $sql = "DELETE FROM Service ";
-        $sql .= "WHERE ServiceID = '" . $service . "' ";
+        $sql .= "WHERE ServiceID = '" . $service['ServiceID'] . "' ";
         $sql .= "LIMIT 1;";
         $result = mysqli_query($db, $sql);
 

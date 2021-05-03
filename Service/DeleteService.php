@@ -1,18 +1,30 @@
 <?php
-require_once('../Service/DatabaseService.php');
+require_once('DatabaseService.php');
 require_once('../initialize.php');
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  delete_service($_POST['ServiceID']);
-  redirect_to('service.php');
+  
+    $service = [];
+    $service['ServiceID'] = $_POST['ServiceID'];
+    $service['Name'] = $_POST['Name'];
+    $service['Rules'] = $_POST['Rules'];
+    $service['Time'] = $_POST['Time'];
+    $service['Famous_Players'] = $_POST['Famous_Players'];
+    $service['CategoryID'] = $_POST['CategoryID'];
+
+    delete_service($service);
+    redirect_to('IndexService.php');
+  
 } else {
   if (!isset($_GET['ServiceID'])) {
-    redirect_to('service.php');
+    redirect_to('IndexService.php');
   }
 
   $serviceID = $_GET['ServiceID'];
   $service = find_service_by_id($serviceID);
 }
+
 ?>
 
 
@@ -27,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title></title>
+  <title>Creative - Bootstrap Admin Template</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -85,17 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-
-          <li class="dropdown">
-
-
-
           <li>
             <?php include('../shareadminMenu.php'); ?>
           </li>
 
-
-          </li>
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
@@ -114,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <i class="icon_house_alt"></i>
               <span>Dashboard</span>
             </a>
-          </li>
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_document_alt"></i>
@@ -156,6 +161,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       <div class="text-right">
         <div class="credits">
+          <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+          -->
 
         </div>
       </div>
@@ -165,56 +176,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
+            <h3 class="page-header"><i class="fa fa-user-o"></i> Form Service</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Edit Admin</li>
+              <li><i class="fa fa-home"></i><a href="home.php">Home</a></li>
+              <li><i class="icon_document_alt"></i>Forms</li>
+              <li><i class="fa fa-files-o"></i>New Service</li>
             </ol>
           </div>
         </div>
-        <br>
+        <!-- Form validations -->
 
-        <div class="col-lg-4 col-lg-offset-4">
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $service['Name']; ?></button>
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Enter Form Admin
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input disabled class=" form-control" name="Name" type="text" value="<?php echo $service['Name']; ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <select disabled class="form-control " name="CategoryID">
+                          <option value="1" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
+                          <option value="2" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
+                          <option value="3" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="time" class="control-label col-lg-2">Time <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input disabled class="form-control " name="Time" type="text" value="<?php echo $service['Time'] ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="Famous_Players" class="control-label col-lg-2">Famous_Players <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input disabled class="form-control " name="Famous_Players" type="text" value="<?php echo $service['Famous_Players'] ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="Rules" class="control-label col-lg-2">Rules <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <textarea disabled class="form-control " name="Rules" type="text"><?php echo $service['Rules']; ?></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                      <div class="col-lg-offset-2 col-lg-10">
+                      
+                        <input type="hidden" name="ServiceID" value="<?php echo $service['ServiceID'] ?>">
+
+                        <input class="btn btn-primary" type="submit" value="Delete" name="submit"></input>
+                      </div>
+                      </form>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
           </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $service['Famous_Players']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $service['CategoryID']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="">
-            <button class="form-control"><?php echo $service['Time']; ?></button>
-          </div>
-          <label class="control-label " id="input-container"></label>
-          <div class="form-group ">
-            <label for="phone" class="control-label col-lg-2">Rules <span class="required"></span></label>
-            <div class="col-lg-10">
-              <p class="form-control " id="phone" name="Rules" type="text"><?php echo $service['Rules']?></p>
-            </div>
-          </div>
-
-          <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-            <input type="hidden" name="username" value="<?php echo $service['ServiceID']; ?>">
-
-            <label class="control-label" id="input-container"></label>
-
-            <div class="col-lg-4 col-lg-offset-4">
-              <button class="form-control" type="submit">Delete</button>
-
-            </div>
-
-
-          </form>
         </div>
+        <!-- page end-->
       </section>
     </section>
+    </div>
+    </div>
+  </section>
   </section>
   <!-- container section start -->
 

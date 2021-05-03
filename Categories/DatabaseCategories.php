@@ -89,7 +89,7 @@ function delete_categories($CategoryID) {
     global $db;
 
     $sql = "DELETE FROM categories ";
-    $sql .= "WHERE CategoryID='" . $CategoryID . "'";
+    $sql .= "WHERE CategoryID='" . $CategoryID['CategoryID'] . "'";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
 

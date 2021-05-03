@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $service['CategoryID'] = $_POST['CategoryID'];
 
     update_service($service);
-    redirect_to('service.php');
+    redirect_to('IndexService.php');
   }
 } else {
   if (!isset($_GET['ServiceID'])) {
-    redirect_to('service.php');
+    redirect_to('IndexService.php');
   }
 
   $serviceID = $_GET['ServiceID'];
@@ -209,6 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <div class="panel-body">
                 <div class="form">
                   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                    <input type="hidden" name="ServiceID" value="<?php echo $service['ServiceID'] ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
@@ -219,9 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <select class="form-control " id="password" name="CategoryID">
-                          <option value="1" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
-                          <option value="2" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
-                          <option value="3" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                          <option value="1" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
+                          <option value="2" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
+                          <option value="3" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
                         </select>
                       </div>
                     </div>

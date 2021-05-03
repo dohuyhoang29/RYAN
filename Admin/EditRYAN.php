@@ -313,55 +313,96 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Table</li>
-              <li><i class="fa fa-files-o"></i>Index Service</li>
+              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="icon_document_alt"></i>Forms</li>
+              <li><i class="fa fa-files-o"></i>New Admin</li>
             </ol>
           </div>
         </div>
+        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
+              <header class="panel-heading">
+                Enter Form Admin
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " method="post">
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="fullname" name="fullname" type="text" value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="username" name="username" type="text" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="password" name="password" type="" value="<?php echo isFormValidated() ? $admin['pass'] : $_POST['pass']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="email" name="email" type="email" value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="phone" name="phone" type="text" value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone']; ?>">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-primary">Save</button>
 
-              <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post" style="max-width:500px;margin:auto">
+                      </div>
+                    </div>
+                  </form>
+                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
+                    <?php
+                    
+                      checkForm();
 
-                <div class="imgcontainer">
-                  <img src="../img/logo.svg" alt="Avatar" class="avatar">
+                      if (isFormValidated()) {
+                        $admin = [];
+                      $admin['fullname'] = $_POST['fullname'];
+                      $admin['username'] = $_POST['username'];
+                      $admin['password'] = sha1($_POST['password']);
+                      $admin['email'] = $_POST['email'];
+                      $admin['phone'] = $_POST['phone'];
+
+                      $admin['pass'] = $_POST['password'];
+
+                        update_admin($admin);
+                        redirect_to('IndexAdmin.php');
+                      
+                    } else {
+                      if (!isset($_GET['AdminID'])) {
+                        redirect_to('IndexAdmin.php');
+                      }
+
+                      $serviceID = $_GET['ServiceID'];
+                      $service = find_service_by_id($serviceID);
+                    }
+                    ?>
+                  <?php endif; ?>
+
+
                 </div>
-                <h2>Edit Admin</h2>
-                <div class="input-container">
-                  <i class="fa fa-user icon"></i>
-                  <input class="input-field" type="text" placeholder="Username" name="username" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username'] ?>">
-                </div>
-
-                <div class="input-container">
-                  <i class="fa fa-key icon"></i>
-                  <input class="input-field" type="text" placeholder="Password" name="password" value="<?php echo isFormValidated() ? $admin['pass'] : $_POST['password'] ?>">
-                </div>
-
-                <div class="input-container">
-                  <i class="fa fa-user icon"></i>
-                  <input class="input-field" type="text" placeholder="Fullname" name="fullname" value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname'] ?>">
-                </div>
-
-                <div class="input-container">
-                  <i class="fa fa-envelope-o icon"></i>
-                  <input class="input-field" type="email" placeholder="Email" name="email" value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email'] ?>">
-                </div>
-
-                <div class="input-container">
-                  <i class="fa fa-phone icon"></i>
-                  <input class="input-field" type="phone" placeholder="Phone" name="phone" value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone'] ?>">
-                </div>
-
-                <button type="submit" class="ltn">Submit</button>
-
-              </form>
-
+              </div>
             </section>
           </div>
         </div>
+        <!-- page end-->
       </section>
     </section>
 
