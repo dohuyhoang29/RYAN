@@ -189,18 +189,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -243,7 +231,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -263,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -289,8 +277,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             <h3 class="page-header"><i class="fa fa-user-o"></i> Form Pictures</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>New Pictures</li>
+              <li><i class="icon_document_alt"></i><a href="IndexPicture.php">Forms</a></li>
+              <li><i class="fa fa-files-o"></i>Edit Pictures</li>
             </ol>
           </div>
         </div>
@@ -305,6 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
               <div class="panel-body">
                 <div class="form">
                   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">

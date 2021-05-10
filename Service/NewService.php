@@ -58,8 +58,7 @@ require_once('../initialize.php');
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
+      <!-- <div class="nav search-row" id="top_menu">
         <ul class="nav top-menu">
           <li>
             <form class="navbar-form">
@@ -67,8 +66,7 @@ require_once('../initialize.php');
             </form>
           </li>
         </ul>
-        <!--  search form end -->
-      </div>
+      </div> -->
 
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
@@ -99,7 +97,7 @@ require_once('../initialize.php');
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -118,7 +116,7 @@ require_once('../initialize.php');
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -235,6 +233,7 @@ require_once('../initialize.php');
     $service['CategoryID'] = $_POST['CategoryID'];
 
     $result = insert_service($service);
+    
     
     ?>
   <?php endif; ?>

@@ -30,24 +30,17 @@
         global $db;
 
         $sql = "INSERT INTO admin ";
-        $sql .= "(Username,Password,Fullname,Email,Phone,pass) ";
+        $sql .= "(Username,Password,Fullname,Email,Phone) ";
         $sql .= "VALUES (";
         $sql .= "'" . $admin['username'] . "',"; 
         $sql .= "'" . $admin['password'] . "',";
         $sql .= "'" . $admin['fullname'] . "',";
         $sql .= "'" . $admin['email'] . "',";
-        $sql .= "'" . $admin['phone'] . "',";
-        $sql .= "'" . $admin['pass'] . "'";
+        $sql .= "'" . $admin['phone'] . "'";
         $sql .= ")";
 
         $result = mysqli_query($db, $sql);
-        if($result) {
-            return true;
-        } else {
-            echo "USERNAME already!";
-            db_disconnect($db);
-            exit;
-        }
+        
         return confirm_query_result($result);
     }
 
@@ -110,9 +103,8 @@
         $sql .= "password = '" . $admin['password'] . "', ";
         $sql .= "fullname = '" . $admin['fullname'] . "', ";
         $sql .= "email = '" . $admin['email'] . "', ";
-        $sql .= "phone = '" . $admin['phone'] . "', ";
-        $sql .= "pass = '" . $admin['pass'] . "'";
-        $sql .= "WHERE username = '" . $admin['username'] . "' ";
+        $sql .= "phone = '" . $admin['phone'] . "' ";
+        $sql .= "WHERE username = '" . $admin['USE'] . "' ";
         $sql .= "LIMIT 1;";
 
         $result = mysqli_query($db, $sql);
@@ -124,7 +116,7 @@
         global $db;
 
         $sql = "DELETE FROM admin ";
-        $sql .= "WHERE username='" . $username['username'] . "' ";
+        $sql .= "WHERE username='" . $username['USE'] . "' ";
         $sql .= "LIMIT 1;";
         $result = mysqli_query($db, $sql);
 

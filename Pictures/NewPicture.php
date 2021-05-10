@@ -51,18 +51,6 @@ require_once('../initialize.php');
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -96,7 +84,7 @@ require_once('../initialize.php');
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -115,7 +103,7 @@ require_once('../initialize.php');
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -174,8 +162,8 @@ require_once('../initialize.php');
                           <option value="1" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '1') echo 'selected' ?>>Cầu Lông</option>
                           <option value="2" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '2') echo 'selected' ?>>Bóng Chuyền</option>
                           <option value="3" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "3") echo 'selected' ?>>Bóng Rổ</option>
-                          <option value="4" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "4") echo 'selected' ?>>Đấu Kiếm</option>
-                          <option value="5" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '5') echo 'selected' ?>>Bóng Bàn</option>
+                          <option value="4" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "4") echo 'selected' ?>>Bóng Bàn</option>
+                          <option value="5" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '5') echo 'selected' ?>>Đấu Kiếm</option>
                           <option value="6" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '6') echo 'selected' ?>>Đá Cầu</option>
                           <option value="7" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '7') echo 'selected' ?>>Bóng Đá</option>
                           <option value="8" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '8') echo 'selected' ?>>Quần Vợt</option>
@@ -183,10 +171,9 @@ require_once('../initialize.php');
                           <option value="10" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '10') echo 'selected' ?>>Bóng Chày</option>
                           <option value="11" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '11') echo 'selected' ?>>Điền Kinh</option>
                           <option value="12" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '12') echo 'selected' ?>>Bơi Lội</option>
-                          <option value="14" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '13') echo 'selected' ?>>Food</option>
-                          <option value="15" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '14') echo 'selected' ?>>Massage</option>
+                          <option value="13" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '13') echo 'selected' ?>>Food</option>
+                          <option value="14" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '14') echo 'selected' ?>>Massage</option>
                           <option value="15" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '15') echo 'selected' ?>>Bi-a</option>
-                          <option value="16" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '16') echo 'selected' ?>>Bar</option>
                           <option value="17" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '17') echo 'selected' ?>>Xông Hơi</option>
                           <option value="18" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '18') echo 'selected' ?>>Yoga</option>
                           <option value="19" <?php if (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == '19') echo 'selected' ?>>Movie</option>

@@ -1,7 +1,8 @@
 <?php
-  require_once('DatabaseAdmin.php');
-  require_once('../initialize.php');
-  
+require_once('DatabaseAdmin.php');
+require_once('../initialize.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
 
-    <!-- =======================================================
+  <!-- =======================================================
       Theme Name: NiceAdmin
       Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
       Author: BootstrapMade
@@ -46,9 +47,11 @@
 
 <body>
   <!-- container section start -->
-  <?php if(!isset($_SESSION['username'])):
-                        redirect_to('login.php');
-                        endif;?>
+  <?php
+  //    if (!isset($_SESSION['username'])) :
+  //   redirect_to('login.php');
+  // endif; 
+  ?>
   <section id="container" class="">
     <!--header start-->
     <header class="header dark-bg">
@@ -60,24 +63,12 @@
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
           <!-- task notificatoin start -->
-          
+
           <!-- alert notification end-->
           <!-- user login dropdown start-->
           <!-- <li class="dropdown">
@@ -86,7 +77,7 @@
           <!-- user login dropdown end -->
 
           <li>
-            <?php include('../sharesession.php'); ?> 
+            <?php include('../sharesession.php'); ?>
           </li>
         </ul>
         <!-- notificatoin dropdown end-->
@@ -101,16 +92,16 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="../home.php">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
+              <i class="icon_house_alt"></i>
+              <span>Home</span>
+            </a>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/NewService.php">Service</a></li>
@@ -121,11 +112,11 @@
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
-                <li><a class="" href="IndexAdmin.php">Admin</a></li>
+              <li><a class="" href="IndexAdmin.php">Admin</a></li>
               <li><a class="" href="../Service/IndexService.php">Service</a></li>
               <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
               <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
@@ -151,7 +142,7 @@
           </div>
         </div>
         <!-- Form validations -->
-        
+
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
@@ -160,35 +151,43 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" name="register" onsubmit="return matchpass()" class="form-validate form-horizontal " method="post">
+                    <!-- <input type="hidden" name="username" value=""> -->
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" required id="fullname" name="fullname" type="text" >
+                        <input class=" form-control" required id="fullname" name="fullname" type="text">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="username" name="username" type="text" >
+                        <input class="form-control " required pattern="^[a-zA-Z0-9]+$" title="Chỉ có thể có chữ và số" id="username" name="username" type="text">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="password" name="password" type="password" />
+                        <input class="form-control " required id="password" name="password" type="password" onkeyup='check();'name="password" type="password" onkeyup='check();' />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="confirm_password" class="control-label col-lg-2">Confirm Password <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " required id="confirm_password" name="confirm_password" type="password" onkeyup='check();' />
+                        <span id='message'></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="email" name="email" type="email"  >
+                        <input class="form-control " required id="email" name="email" type="email">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="phone" name="phone" type="text" >
+                        <input class="form-control " required id="phone" name="phone" type="text">
                       </div>
                     </div>
                     <div class="form-group">
@@ -198,22 +197,19 @@
                       </div>
                     </div>
                   </form>
-                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST'): ?> 
-                      <div class="error">
-                      <?php 
+                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
+                    <div class="error">
+                      <?php
                       $admin = [];
                       $admin['fullname'] = $_POST['fullname'];
                       $admin['username'] = $_POST['username'];
                       $admin['password'] = sha1($_POST['password']);
                       $admin['email'] = $_POST['email'];
                       $admin['phone'] = $_POST['phone'];
-
-                      $admin['pass'] = $_POST['password'];
-
                       $result = insert_admin($admin);
                       $newadminID = mysqli_insert_id($db);
                       ?>
-                      </div>
+                    </div>
                   <?php endif; ?>
 
 
@@ -243,11 +239,38 @@
   <!--custome script for all page-->
   <script src="../js/scripts.js"></script>
 
-  
+  <script type="text/javascript">
+    var check = function() {
+      if (document.getElementById('password').value ==
+        document.getElementById('confirm_password').value) {
+        document.getElementById('message').style.color = 'blue';
+        document.getElementById('message').innerHTML = '';
+        document.getElementById('confirm_password').style.border = '1px solid #ceced2';
+      } else {
+        document.getElementById('message').style.color = 'red';
+        document.getElementById('message').innerHTML = 'not Invalid';
+        document.getElementById('confirm_password').style.border = '1px solid red';
+      }
+    }
+
+    function matchpass() {
+      var firstpassword = document.register.password.value;
+      var secondpassword = document.register.confirm_password.value;
+
+      if (firstpassword == secondpassword) {
+        document.getElementById('message').style.color = 'blue';
+        document.getElementById('message').innerHTML = 'Invalid';
+        return true;
+      } else {
+        document.getElementById('confirm_password').style.border = '1px solid red';
+        return false;
+      }
+    }
+  </script>
 </body>
 
 </html>
 
 <?php
-  db_disconnect($db);
+db_disconnect($db);
 ?>
