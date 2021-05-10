@@ -39,7 +39,7 @@ function insert_Picture($Picture) {
     $sql .= "(Name, URL, ServiceID) ";
     $sql .= "VALUES (";
     $sql .= "'" . $Picture['Name'] . "',"; //be careful of single quotes
-    $sql .= "'../img/" . $Picture['URL'] . "',";//be careful of single quotes
+    $sql .= "'" . $Picture['URL'] . "',";//be careful of single quotes
     $sql .= "'" . $Picture['ServiceID'] . "'";//be careful of single quotes
     $sql .= ")";
     $result = mysqli_query($db, $sql);
@@ -92,7 +92,7 @@ function Delete_Picture($picture) {
     global $db;
 
     $sql = "DELETE FROM Pictures ";
-    $sql .= "WHERE PictureID='" . $picture. "' ";
+    $sql .= "WHERE PictureID='" . $picture['PictureID']. "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
 

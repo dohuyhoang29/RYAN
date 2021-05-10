@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Creative - Bootstrap Admin Template</title>
+  <title>Edit Service</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -95,26 +95,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
+          <?php if (!isset($_SESSION['username'])) :
+            redirect_to('../Admin/login.php');
+          endif; ?>
 
+          <li>
+            <?php include('../sharesession.php'); ?>
+          </li>
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
@@ -131,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
 
           <li class="sub-menu">
@@ -151,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -193,8 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h3 class="page-header"><i class="fa fa-user-o"></i> Form Service</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>New Service</li>
+              <li><i class="icon_document_alt"></i><a href="IndexService.php"></a></li>
+              <li><i class="fa fa-files-o"></i>Edit Service</li>
             </ol>
           </div>
         </div>
@@ -204,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                Enter Form Admin
+                Edit Form Service
               </header>
               <div class="panel-body">
                 <div class="form">

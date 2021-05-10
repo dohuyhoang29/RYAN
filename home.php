@@ -1,3 +1,8 @@
+<?php
+    require_once('Admin/DatabaseAdmin.php');
+    require_once('initialize.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Admin</title>
+  <title>Home Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -111,6 +116,7 @@
 </head>
 
 <body>
+
   <!-- container section start -->
   <section id="container" class="">
 
@@ -125,49 +131,16 @@
       <a href="home.php" class="logo"><img style="padding-bottom: 10px;" src="img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
+  
+          <?php if(!isset($_SESSION['username'])):
+            redirect_to('Admin/LogoutRYAN.php');
+          endif;?>
 
-
-          <li class="dropdown">
-            <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="profile-ava">
-                <img alt="" src="img/avatar01.jpg">
-              </span>
-              <span class="username"><?php include('shareadminMenu.php'); ?></span>
-              <b class="caret"></b>
-            </a> -->
-            <ul class="dropdown-menu extended logout">
-              <div class="log-arrow-up"></div>
-              <li class="eborder-top">
-
-              <!-- <li>
-                <a href="../Admin/login.php"><i class="icon_key_alt"></i> Log Out</a>
-              </li> -->
-
-            </ul>
-          </li>
           <?php include('shareadminMenu.php'); ?>
-          <!-- <li>
-            <a href="Admin/login.php"><i class="icon_key_alt"></i></a>
-          </li> -->
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
+    
       </div>
+
     </header>
     <!--header end-->
 
@@ -179,15 +152,15 @@
           <li class="active">
             <a class="" href="home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
             <ul class="sub">
               <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Admin/NewAdmin.php">Admin</a></li>
               <li><a class="" href="../RYAN_SPORT_CLUB_ADMIN/Service/NewService.php">Service</a></li>
@@ -210,8 +183,6 @@
             </ul>
           </li>
 
-
-
         </ul>
 
         <!-- sidebar menu end-->
@@ -220,24 +191,18 @@
     <!--sidebar end-->
 
     <!--main content start-->
-    <section id="main-content">
+    <!-- <section id="main-content">
 
       <div class="text-right">
         <div class="credits">
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-          -->
-          <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+         
         </div>
       </div>
-    </section>
+    </section> -->
     <!--main content end-->
   </section>
 
-  <div class="slideshow-container">
+      <div class="slideshow-container">
 
         <div class="mySlides fade">
           <div class="numbertext"></div>
@@ -256,12 +221,6 @@
           <img src="img/bong_da4.jpg" style="width:100%">
 
         </div>
-
-        <!-- <div class="mySlides fade">
-          <div class="numbertext"></div>
-          <img src="imgs/a4.jpg" style="width:100%">
-
-        </div> -->
 
       </div>
         <br>
@@ -312,32 +271,32 @@
   <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="js/fullcalendar.min.js">
-    </script>
-    <!-- Full Google Calendar - Calendar -->
-    <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-    <!--script for this page only-->
-    <script src="js/calendar-custom.js"></script>
-    <script src="js/jquery.rateit.min.js"></script>
-    <!-- custom select -->
-    <script src="js/jquery.customSelect.min.js"></script>
-    <script src="assets/chart-master/Chart.js"></script>
+  <script src="js/fullcalendar.min.js">
+  </script>
+  <!-- Full Google Calendar - Calendar -->
+  <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+  <!--script for this page only-->
+  <script src="js/calendar-custom.js"></script>
+  <script src="js/jquery.rateit.min.js"></script>
+  <!-- custom select -->
+  <script src="js/jquery.customSelect.min.js"></script>
+  <script src="assets/chart-master/Chart.js"></script>
 
-    <!--custome script for all page-->
-    <script src="js/scripts.js"></script>
-    <!-- custom script for this page-->
-    <script src="js/sparkline-chart.js"></script>
-    <script src="js/easy-pie-chart.js"></script>
-    <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="js/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="js/xcharts.min.js"></script>
-    <script src="js/jquery.autosize.min.js"></script>
-    <script src="js/jquery.placeholder.min.js"></script>
-    <script src="js/gdp-data.js"></script>
-    <script src="js/morris.min.js"></script>
-    <script src="js/sparklines.js"></script>
-    <script src="js/charts.js"></script>
-    <script src="js/jquery.slimscroll.min.js"></script>
+  <!--custome script for all page-->
+  <script src="js/scripts.js"></script>
+  <!-- custom script for this page-->
+  <script src="js/sparkline-chart.js"></script>
+  <script src="js/easy-pie-chart.js"></script>
+  <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="js/jquery-jvectormap-world-mill-en.js"></script>
+  <script src="js/xcharts.min.js"></script>
+  <script src="js/jquery.autosize.min.js"></script>
+  <script src="js/jquery.placeholder.min.js"></script>
+  <script src="js/gdp-data.js"></script>
+  <script src="js/morris.min.js"></script>
+  <script src="js/sparklines.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/jquery.slimscroll.min.js"></script>
     <script>
       //knob
       $(function () {

@@ -1,6 +1,6 @@
 <?php
-require_once('DatabaseAdmin.php');
-require_once('../initialize.php');
+  require_once('DatabaseAdmin.php');
+  require_once('../initialize.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Admin</title>
+  <title>Index Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -27,25 +27,11 @@ require_once('../initialize.php');
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-  <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
+  
 </head>
 
 <body>
-  <!-- <?php if (!isset($_SESSION['username'])) :
-          redirect_to('login.php');
-        endif; ?> -->
+  
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -58,24 +44,15 @@ require_once('../initialize.php');
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
+          <?php if(!isset($_SESSION['username'])):
+              redirect_to('LogoutRYAN.php');
+            endif;?>
           <li>
-            <?php include('../shareadminMenu.php'); ?>
+            <?php include('../sharesession.php'); ?>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -92,7 +69,7 @@ require_once('../initialize.php');
           <li class="">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -114,7 +91,7 @@ require_once('../initialize.php');
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -156,7 +133,6 @@ require_once('../initialize.php');
                     <th><i class="icon_profile"></i> User Name</th>
                     <th><i class="icon_calendar"></i> Password</th>
                     <th><i class="icon_mail_alt"></i> Full Name</th>
-
                     <th><i class="icon_mobile"></i> Phone</th>
                     <th><i class="icon_pin_alt"></i> email</th>
                   </tr>
@@ -168,7 +144,7 @@ require_once('../initialize.php');
                   ?>
                     <tr>
                       <td><?php echo $admin['username']; ?></td>
-                      <td><?php echo $admin['pass']; ?></td>
+                      <td><?php echo $admin['password']; ?></td>
                       <td><?php echo $admin['fullname']; ?></td>
                       <td><?php echo $admin['phone']; ?></td>
                       <td><?php echo $admin['email']; ?></td>
@@ -212,6 +188,7 @@ require_once('../initialize.php');
 </body>
 
 </html>
+
 <?php
-db_disconnect($db);
+  db_disconnect($db);
 ?>

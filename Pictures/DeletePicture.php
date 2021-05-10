@@ -2,32 +2,16 @@
 require_once('DatabasePicture.php');
 require_once('../initialize.php');
 
-$errors = [];
 
-function isFormValidated()
-{
-  global $errors;
-  return count($errors) == 0;
-}
-
-function checkForm()
-{
-  global $errors;
-  if (empty($_POST['Name'])) {
-    $errors[] = 'Name is required';
-  }
-
-  if (empty($_POST['URL'])) {
-    $errors[] = 'URL is required';
-  }
-
-  if (empty($_POST['ServiceID'])) {
-    $errors[] = 'ServiceID is required';
-  }
-}
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-
+  
+  $picture = [];
+  $picture['PictureID'] = $_POST['PictureID'];
+  $picture['Name'] = $_POST['Name'];
+  $picture['URL'] = $_POST['URL'];
+  $picture['ServiceID'] = $_POST['ServiceID'];
+ 
   Delete_Picture($picture);
   redirect_to('IndexPicture.php');
 } else { // form loaded
@@ -164,9 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  <?php if (!isset($_SESSION['username'])) :
-    redirect_to('Admin/LoginRYAN.php');
-  endif; ?>
+  
 
   <section id="container" class="">
 
@@ -179,18 +161,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       <!--logo start-->
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
-
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
 
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
@@ -234,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -254,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -280,8 +250,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             <h3 class="page-header"><i class="fa fa-user-o"></i> Form Pictures</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>New Pictures</li>
+              <li><i class="icon_document_alt"></i><a href="IndexPicture.php">Forms</a></li>
+              <li><i class="fa fa-files-o"></i>Delete Pictures</li>
             </ol>
           </div>
         </div>
@@ -305,7 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Picture <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <img style="width: 50%; height: 50%;" src="<?php echo $picture['URL']; ?>">
+                        <img style="width: 50%; height: 50%;" src="<?php echo '../img/' . $picture['URL']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
@@ -337,7 +307,15 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Delete</button>
+
+                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                      <div class="col-lg-offset-2 col-lg-10">
+                      
+                        <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
+
+                        <input class="btn btn-primary" type="submit" value="Delete" name="submit"></input>
+                      </div>
+                      </form>
                       </div>
                     </div>
                   </form>

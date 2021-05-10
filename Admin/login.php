@@ -1,21 +1,21 @@
-
 <?php
 
 require_once('DatabaseAdmin.php');
 require_once('../initialize.php');
-$errors=[];
+$errors = [];
 
-if ($_SERVER["REQUEST_METHOD"] == 'POST'){
-    if (empty($_POST['username'])){
-        $errors[] = 'Username is required';
-    }
-    if (empty($_POST['password'])){
-        $errors[] = 'Password is required';
-    }
+if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+  if (empty($_POST['username'])) {
+    $errors[] = 'Username is required';
+  }
+  if (empty($_POST['password'])) {
+    $errors[] = 'Password is required';
+  }
 }
-function isFormValidated(){
-    global $errors;
-    return count($errors) == 0;
+function isFormValidated()
+{
+  global $errors;
+  return count($errors) == 0;
 }
 
 ?>
@@ -31,7 +31,7 @@ function isFormValidated(){
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/ronaldo.jpg">
 
-  <title>Login Page </title>
+  <title>Login </title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -56,51 +56,48 @@ function isFormValidated(){
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" placeholder="Username" autofocus name="username" value="<?php echo isFormValidated()? '': $_POST['username'] ?>">
+          <input type="text" class="form-control" placeholder="Username" autofocus name="username" value="<?php echo isFormValidated() ? '' : $_POST['username'] ?>">
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
           <input type="password" class="form-control" placeholder="Password" name="password">
         </div>
-        <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-        </label>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-        <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+        <button class="btn btn-info btn-lg btn-block" type="submit"><a href="NewAdmin.php">Sign up</a></button>
       </div>
     </form>
 
-    <?php if ($_SERVER["REQUEST_METHOD"] == 'POST' && !isFormValidated()): ?> 
-            <div class="error">
-                <span> Please fix the following errors </span>
-                <ul>
-                    <?php
-                    foreach ($errors as $key => $value){
-                        if (!empty($value)){
-                            echo '<li>', $value, '</li>';
-                        }
-                    }
-                    ?>
-                </ul>
-            </div><br><br>
-        <?php endif; ?>
-
-      <br>
-
-      <?php
-          if ($_SERVER["REQUEST_METHOD"] == 'POST' && isFormValidated()){
-              $username = $_POST['username'];
-              $Login = find_usenmae($username);
-              if($Login['Password'] === sha1($_POST['password'])){
-                  $_SESSION['username'] = $username;
-                  redirect_to('../home.php');
-                  // echo "Ban Da Dang Nhap Thanh Cong";
-              }else{
-                  echo "Username or Password wrong!";
-              }
+    <?php if ($_SERVER["REQUEST_METHOD"] == 'POST' && !isFormValidated()) : ?>
+      <div class="error">
+        <span> Please fix the following errors </span>
+        <ul>
+          <?php
+          foreach ($errors as $key => $value) {
+            if (!empty($value)) {
+              echo '<li>', $value, '</li>';
+            }
           }
-      ?>
-    
+          ?>
+        </ul>
+      </div><br><br>
+    <?php endif; ?>
+
+    <br>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == 'POST' && isFormValidated()) {
+      $username = $_POST['username'];
+      $Login = find_usenmae($username);
+      if ($Login['Password'] === sha1($_POST['password'])) {
+        $_SESSION['username'] = $username;
+        redirect_to('../home.php');
+        // echo "Ban Da Dang Nhap Thanh Cong";
+      } else {
+        echo "Username or Password wrong!";
+      }
+    }
+    ?>
+
   </div>
 
 

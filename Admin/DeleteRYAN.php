@@ -8,67 +8,59 @@ function isFormValidated()
   global $errors;
   return count($errors) == 0;
 }
-//alkdjlfajsl;fjas;lkf
 
-function checkForm()
-{
-  global $errors;
-  $username = $_POST['username'];
-  if (empty($_POST['username'])) {
-    $errors[] = 'Username is required';
-  }
 
-  if (!empty($_POST['username']) && find_all_admin_different($username)) {
-    $error[] = 'Username must be different';
-  }
+// function checkForm()
+// {
+//   global $errors;
+//   $username = $_POST['username'];
+//   if (empty($_POST['username'])) {
+//     $errors[] = 'Username is required';
+//   }
 
-  if (empty($_POST['password'])) {
-    $errors[] = 'Password is required';
-  }
-  if (empty($_POST['fullname'])) {
-    $errors[] = 'fullname is required';
-  }
-  if (empty($_POST['email'])) {
-    $errors[] = 'email is required';
-  }
+//   if (!empty($_POST['username']) && find_all_admin_different($username)) {
+//     $error[] = 'Username must be different';
+//   }
 
-  if (empty($_POST['phone'])) {
-    $errors[] = 'Phone is required';
-  } else {
-    if (!empty($_POST['phone']) && !is_numeric($_POST['phone']) == 1) {
-      $errors[] = "Phone must be number!";
-    } else {
-      if (!empty($_POST['phone']) && count((str_split($_POST['phone']))) != 10) {
-        $errors[] = 'Phone must have 10 number!';
-      }
-    }
-  }
-}
+//   if (empty($_POST['password'])) {
+//     $errors[] = 'Password is required';
+//   }
+//   if (empty($_POST['fullname'])) {
+//     $errors[] = 'fullname is required';
+//   }
+//   if (empty($_POST['email'])) {
+//     $errors[] = 'email is required';
+//   }
 
+//   if (empty($_POST['phone'])) {
+//     $errors[] = 'Phone is required';
+//   } else {
+//     if (!empty($_POST['phone']) && !is_numeric($_POST['phone']) == 1) {
+//       $errors[] = "Phone must be number!";
+//     } else {
+//       if (!empty($_POST['phone']) && count((str_split($_POST['phone']))) != 10) {
+//         $errors[] = 'Phone must have 10 number!';
+//       }
+//     }
+//   }
+// }
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-  checkForm();
-  if (isFormValidated()) {
 
-    $admin_set = find_ADMIN_by_USE();
-    $ADMIN = mysqli_fetch_assoc($admin_set);
+  $username = $_SESSION['deleteadmin'];
+  $admin_set = find_admin_by_id($username);
+  $admin = [];
+  $admin['USE'] = $admin_set['username'];
+  $admin['username'] = $_POST['username'];
+  
 
-    $admin = [];
-    $admin['USE'] = $ADMIN['username'];
-    $admin['username'] = $_POST['username'];
-    $admin['password'] = sha1($_POST['password']);
-    $admin['fullname'] = $_POST['fullname'];
-    $admin['email'] = $_POST['email'];
-    $admin['phone'] = $_POST['phone'];
-    $admin['pass'] = $_POST['password'];
-
-    Update_admin($admin);
-    redirect_to('IndexAdmin.php');
-  }
-} else { // form loaded
-  if (!isset($_GET['username'])) {
-    redirect_to('IndexAdmin.php');
+  delete_admin($admin);
+  redirect_to('IndexAdmin.php');
+}else { // form loaded
+  if(!isset($_GET['username'])) {
+      redirect_to('IndexAdmin.php');
   }
   $username = $_GET['username'];
+  $_SESSION['deleteadmin'] = $username;
   $admin = find_admin_by_id($username);
 }
 ?>
@@ -196,9 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  <!-- <?php if (!isset($_SESSION['username'])) :
-          redirect_to('LoginRYAN.php');
-        endif; ?> -->
+  
   <section id="container" class="">
 
 
@@ -210,47 +200,16 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       <!--logo start-->
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
-
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
+          <?php if (!isset($_SESSION['username'])) :
+            redirect_to('login.php');
+          endif; ?>
 
-          <!-- <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="profile-ava">
-                            <img alt="" src="img/avatar01.jpg">
-                        </span>
-                        <span class="username"></span>
-                        <b class="caret"></b>
-                    </a>
-        <ul class="dropdown-menu extended logout">
-          <div class="log-arrow-up"></div>
-          <li class="eborder-top">
-            
           <li>
-            <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
-          </li>
-          
-        </ul>
-      </li> -->
-          <!-- <li>
-        
-      </li> -->
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
+            <?php include('../sharesession.php'); ?>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -265,9 +224,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.php">
+            <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -287,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -313,9 +272,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-o"></i>Admin</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="icon_document_alt"></i>Forms</li>
-              <li><i class="fa fa-files-o"></i>New Admin</li>
+              <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
+              <li><i class="icon_document_alt"></i><a href="IndexAdmin.php">Index</a></li>
+              <li><i class="fa fa-files-o"></i>Delete Admin</li>
             </ol>
           </div>
         </div>
@@ -325,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                Enter Form Admin
+                Delete Admin
               </header>
               <div class="panel-body">
                 <div class="form">
@@ -333,31 +292,31 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="fullname" type="text"value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname']; ?>">
+                        <input disabled class=" form-control" id="fullname" name="fullname" type="text"value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="username" name="username" type="text" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
+                        <input disabled class="form-control " id="username" name="username" type="text" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="password" name="password" type="" value="<?php echo isFormValidated() ? $admin['pass'] : $_POST['pass']; ?>">
+                        <input disabled class="form-control " id="password" name="password" type="" value="<?php echo isFormValidated() ? $admin['password'] : $_POST['password']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="email" name="email" type="email"value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email']; ?>">
+                        <input disabled class="form-control " id="email" name="email" type="email"value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="phone" name="phone" type="text"value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone']; ?>">
+                        <input disabled class="form-control " id="phone" name="phone" type="text"value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone']; ?>">
                       </div>
                     </div>
                     <div class="form-group">
@@ -367,21 +326,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                       </div>
                     </div>
                   </form>
-                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
-                      <?php
-                      $admin = [];
-                      $admin['fullname'] = $_POST['fullname'];
-                      $admin['username'] = $_POST['username'];
-                      $admin['password'] = sha1($_POST['password']);
-                      $admin['email'] = $_POST['email'];
-                      $admin['phone'] = $_POST['phone'];
-
-                      $admin['pass'] = $_POST['password'];
-
-                      $result = insert_admin($admin);
-                      $newadminID = mysqli_insert_id($db);
-                      ?>
-                  <?php endif; ?>
 
 
                 </div>

@@ -14,7 +14,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title></title>
+  <title>Index Service</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -55,29 +55,17 @@ require_once('../initialize.php');
       <!--logo start-->
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
-
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
 
-          <li class="dropdown">
+          <?php if (!isset($_SESSION['username'])) :
+            redirect_to('../Admin/login.php');
+          endif; ?>
 
           <li>
             <?php include('../sharesession.php'); ?>
-          </li>
           </li>
           <!-- user login dropdown end -->
         </ul>
@@ -95,7 +83,7 @@ require_once('../initialize.php');
           <li class="active">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -115,7 +103,7 @@ require_once('../initialize.php');
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -166,10 +154,13 @@ require_once('../initialize.php');
                 <tbody>
                   <tr>
                     <th>Name</th>
+                    <th>Time</th>
+                    <th>Famous_Players</th>
+                    <th>&nbsp;</th>
                     <th>Rules</th>
                     <th>&nbsp;</th>
-                    <th>Time</th>
-                    <th>Famous Players</th>
+                    <th>Category</th>
+                    <th>&nbsp;</th>
                   </tr>
                   <?php
                   $service_set = find_all_service();
@@ -179,9 +170,12 @@ require_once('../initialize.php');
                   ?>
 
                     <tr>
-                      <td><?php echo $service['name']; ?></td>  
+                      <td><?php echo $service['name']; ?></td>
                       <td><?php echo $service['Time']; ?></td>
-                      <td><?php echo $service['Famous_Players']; ?></td>
+                      <td class="famous"><?php echo $service['Famous_Players']; ?></td>
+                      <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#famous">View all</button></td>
+                      <td class="rules"><?php echo $service['Rules']; ?></td>
+                      <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#rules">View all</button></td>
                       <td><?php echo $service['Name']; ?></td>
                       <td>
                         <div class="btn-group">
@@ -190,8 +184,37 @@ require_once('../initialize.php');
                           <a class="btn btn-danger" href="<?php echo "DeleteService.php?ServiceID=" . $service['ServiceID']; ?>"><i class="icon_close_alt2"></i></a>
                         </div>
                       </td>
-
                     </tr>
+                    <div class="modal fade" id="famous" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable " role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Famous_Players</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p style="color: black;"><?php echo $service['Famous_Players']; ?></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div><!--  -->
+                    <div class="modal fade" id="rules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable " role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Rules</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p style="color: black;"><?php echo $service['Rules']; ?></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   <?php
                   endfor;
                   mysqli_free_result($service_set);
@@ -201,6 +224,9 @@ require_once('../initialize.php');
             </section>
           </div>
         </div>
+
+        <!-- Modal -->
+
       </section>
     </section>
     <!-- container section start -->
@@ -294,6 +320,15 @@ require_once('../initialize.php');
         $(document).ready(function() {
 
           $('.rules').each(function(f) {
+
+            var newstr = $(this).text().substring(0, 30);
+            $(this).text(newstr);
+
+          });
+        })
+        $(document).ready(function() {
+
+          $('.famous').each(function(f) {
 
             var newstr = $(this).text().substring(0, 30);
             $(this).text(newstr);

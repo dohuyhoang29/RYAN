@@ -91,9 +91,7 @@ require_once('../initialize.php');
 </head>
 
 <body>
-  <?php if (!isset($_SESSION['username'])) :
-    redirect_to('../Admin/login.php');
-  endif; ?>
+ 
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -106,21 +104,13 @@ require_once('../initialize.php');
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
+
+        <?php if (!isset($_SESSION['username'])) :
+            redirect_to('../Admin/login.php');
+          endif; ?>
 
           <li>
             <?php include('../sharesession.php'); ?>
@@ -140,7 +130,7 @@ require_once('../initialize.php');
           <li class="">
             <a class="" href="../home.php">
               <i class="icon_house_alt"></i>
-              <span>Dashboard</span>
+              <span>Home</span>
             </a>
           </li>
           <li class="sub-menu">
@@ -162,7 +152,7 @@ require_once('../initialize.php');
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_table"></i>
-              <span>Tables</span>
+              <span>Index</span>
               <span class="menu-arrow arrow_carrot-right"></span>
             </a>
             <ul class="sub">
@@ -214,7 +204,7 @@ require_once('../initialize.php');
                     ?>
                       <tr>
                         <td><?php echo $picture['Name']; ?></td>
-                        <td class="img" ><img style="width: 100%; height: 100%;" src="<?php echo $picture['URL']; ?>"></td>
+                        <td class="img" ><img style="width: 100%; height: 100%;" src="<?php echo  '../img/' . $picture['URL']; ?>"></td>
                         <!-- <td><img src="../img/cau_long1.jpg" alt=""></td> -->
                         <td><?php echo $picture['name']; ?></td>
                         <td>
