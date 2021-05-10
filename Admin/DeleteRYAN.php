@@ -9,7 +9,6 @@ function isFormValidated()
   return count($errors) == 0;
 }
 
-
 // function checkForm()
 // {
 //   global $errors;
