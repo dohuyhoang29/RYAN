@@ -31,9 +31,14 @@ function checkForm()
   if (empty($_POST['password'])) {
     $errors[] = 'Password is required';
   }
-  if (empty($_POST['password'])) {
-    $errors[] = 'Password is required';
-  }
+
+  // if(sha1($_POST['password']) != sha1($_POST['new'])){
+  //   $error[] = 'mk sai';
+  // }
+  // if(!sha1($_POST['password'])) {
+  //   $error[] = 'mk sai';
+  // }
+
   if (empty($_POST['new'])) {
     $errors[] = 'Password is required';
   }
@@ -98,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 <html lang="en">
 
 <head>
-  <title>Edit admin</title>
+
   <meta charset="utf-8">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -217,11 +222,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  <?php
-  // if (!isset($_SESSION['username'])) :
-  //   redirect_to('LoginRYAN.php');
-  // endif;
-  ?>
   <section id="container" class="">
 
 
@@ -234,7 +234,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
       <!--logo end-->
 
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -246,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             <?php include('../sharesession.php'); ?>
           </li>
         </ul>
-        <!-- notificatoin dropdown end-->
+
       </div>
     </header>
     <!--header end-->
@@ -338,7 +337,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="password" name="password" type="">
+                        <input class="form-control " id="password" name="password" type="password">
                       </div>
                     </div>
                     <div class="form-group ">
@@ -383,12 +382,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       </section>
     </section>
 
-
-
-
     <br><br>
-    <script src="../js/jquery-2.2.4.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+ 
     <script src="../js/jquery.js"></script>
     <script src="../js/jquery-ui-1.10.4.min.js"></script>
     <script src="../js/jquery-1.8.3.min.js"></script>
@@ -457,6 +452,18 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           return false;
         }
       }
+
+      // function password(){
+      //   var old = document.register.password.value;
+      //   var news = document.register.new.value;
+      // }
+
+      // if (old == news) {
+      //       return true;
+      //   } else {
+      //       alert("password cũ không đúng!");
+      //       return false;
+      //   }
     </script>
 </body>
 
