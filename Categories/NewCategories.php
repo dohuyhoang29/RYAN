@@ -57,7 +57,7 @@
             <?php include('../sharesession.php'); ?>
           </li>
             
-     
+          </li>
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->

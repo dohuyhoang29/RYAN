@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Edit Service</title>
+  <title>Creative - Bootstrap Admin Template</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -99,13 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          <?php if (!isset($_SESSION['username'])) :
-            redirect_to('../Admin/login.php');
-          endif; ?>
-
           <li>
-            <?php include('../sharesession.php'); ?>
+            <?php include('../shareadminMenu.php'); ?>
           </li>
+
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->

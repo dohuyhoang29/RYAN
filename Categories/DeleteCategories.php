@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-
           <?php if (!isset($_SESSION['username'])) :
             redirect_to('../Admin/login.php');
           endif; ?>
@@ -105,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li>
             <?php include('../sharesession.php'); ?>
           </li>
-          <!-- user login dropdown end -->
+          
         </ul>
         <!-- notificatoin dropdown end-->
       </div>

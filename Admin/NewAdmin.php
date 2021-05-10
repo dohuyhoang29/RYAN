@@ -30,16 +30,12 @@ require_once('../initialize.php');
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
- 
+  
 </head>
 
 <body>
   <!-- container section start -->
-  <?php
-  //    if (!isset($_SESSION['username'])) :
-  //   redirect_to('login.php');
-  // endif; 
-  ?>
+  
   <section id="container" class="">
     <!--header start-->
     <header class="header dark-bg">
@@ -55,12 +51,12 @@ require_once('../initialize.php');
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-            <?php if(!isset($_SESSION['username'])):
-              redirect_to('LogoutRYAN.php');
-            endif;?>
-            <li>
-              <?php include('../sharesession.php'); ?>
-            </li>
+        <?php if(!isset($_SESSION['username'])):
+          redirect_to('LogoutRYAN.php');
+        endif;?>
+        <li>
+          <?php include('../sharesession.php'); ?>
+        </li>
         </ul>
         <!-- notificatoin dropdown end-->
       </div>
@@ -128,34 +124,31 @@ require_once('../initialize.php');
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
-              <!-- <header class="panel-heading">
+              <header class="panel-heading">
                 Enter Form Admin
-              </header> -->
+              </header>
               <div class="panel-body">
                 <div class="form">
                   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" name="register" onsubmit="return matchpass()" class="form-validate form-horizontal " method="post">
-  
+                    <!-- <input type="hidden" name="username" value=""> -->
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class=" form-control" required id="fullname" name="fullname" type="text">
                       </div>
                     </div>
-
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " required pattern="^[a-zA-Z0-9]+$" title="Chỉ có thể có chữ và số" id="username" name="username" type="text">
                       </div>
                     </div>
-
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " required id="password" name="password" type="password" onkeyup='check();'name="password" type="password" onkeyup='check();' />
                       </div>
                     </div>
-
                     <div class="form-group ">
                       <label for="confirm_password" class="control-label col-lg-2">Confirm Password <span class="required">*</span></label>
                       <div class="col-lg-10">
@@ -163,43 +156,39 @@ require_once('../initialize.php');
                         <span id='message'></span>
                       </div>
                     </div>
-
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " required id="email" name="email" type="email">
                       </div>
                     </div>
-
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " required id="phone" name="phone" type="text">
                       </div>
                     </div>
-
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button type="submit" class="btn btn-primary">Save</button>
+
                       </div>
                     </div>
-
                   </form>
-
-                    <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
-                      <div class="error">
-                        <?php
-                        $admin = [];
-                        $admin['fullname'] = $_POST['fullname'];
-                        $admin['username'] = $_POST['username'];
-                        $admin['password'] = sha1($_POST['password']);
-                        $admin['email'] = $_POST['email'];
-                        $admin['phone'] = $_POST['phone'];
-                        $result = insert_admin($admin);
-                        $newadminID = mysqli_insert_id($db);
-                        ?>
-                      </div>
-                    <?php endif; ?>
+                  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
+                    <div class="error">
+                      <?php
+                      $admin = [];
+                      $admin['fullname'] = $_POST['fullname'];
+                      $admin['username'] = $_POST['username'];
+                      $admin['password'] = sha1($_POST['password']);
+                      $admin['email'] = $_POST['email'];
+                      $admin['phone'] = $_POST['phone'];
+                      $result = insert_admin($admin);
+                      $newadminID = mysqli_insert_id($db);
+                      ?>
+                    </div>
+                  <?php endif; ?>
 
 
                 </div>
@@ -228,8 +217,7 @@ require_once('../initialize.php');
   <!--custome script for all page-->
   <script src="../js/scripts.js"></script>
 
- 
-  <script type="text/javascript">// kiểm tra mật khẩu 
+  <script type="text/javascript">
     var check = function() {
       if (document.getElementById('password').value ==
         document.getElementById('confirm_password').value) {
@@ -262,5 +250,5 @@ require_once('../initialize.php');
 </html>
 
 <?php
-  db_disconnect($db);
+db_disconnect($db);
 ?>

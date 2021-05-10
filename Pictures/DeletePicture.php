@@ -148,7 +148,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  
+  <?php if (!isset($_SESSION['username'])) :
+    redirect_to('Admin/LoginRYAN.php');
+  endif; ?>
 
   <section id="container" class="">
 

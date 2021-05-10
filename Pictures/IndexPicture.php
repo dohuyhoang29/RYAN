@@ -91,7 +91,9 @@ require_once('../initialize.php');
 </head>
 
 <body>
- 
+  <?php if (!isset($_SESSION['username'])) :
+    redirect_to('../Admin/login.php');
+  endif; ?>
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -107,10 +109,6 @@ require_once('../initialize.php');
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
-
-        <?php if (!isset($_SESSION['username'])) :
-            redirect_to('../Admin/login.php');
-          endif; ?>
 
           <li>
             <?php include('../sharesession.php'); ?>

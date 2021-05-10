@@ -30,7 +30,12 @@ require_once('../initialize.php');
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
- 
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+  <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
 </head>
 
 <body>
@@ -51,15 +56,18 @@ require_once('../initialize.php');
         <ul class="nav pull-right top-menu">
 
           <!-- task notificatoin start -->
-          
-            
-        
-          <?php if (!isset($_SESSION['username'])) :
-            redirect_to('../Admin/login.php');
-          endif; ?>
+          <li id="task_notificatoin_bar" class="dropdown">
 
-          <li>
-            <?php include('../sharesession.php'); ?>
+            
+          <!-- alert notification end-->
+          <!-- user login dropdown start-->
+          <li class="dropdown">
+            
+            
+            <li>
+              <?php include('../sharesession.php'); ?> 
+            </li>
+            
           </li>
           <!-- user login dropdown end -->
         </ul>

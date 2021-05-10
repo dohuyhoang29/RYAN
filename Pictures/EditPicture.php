@@ -194,13 +194,28 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <ul class="nav pull-right top-menu">
 
 
-          <?php if (!isset($_SESSION['username'])) :
-            redirect_to('../Admin/login.php');
-          endif; ?>
-
+          <!-- <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="profile-ava">
+                            <img alt="" src="img/avatar01.jpg">
+                        </span>
+                        <span class="username"></span>
+                        <b class="caret"></b>
+                    </a>
+        <ul class="dropdown-menu extended logout">
+          <div class="log-arrow-up"></div>
+          <li class="eborder-top">
+            
           <li>
-            <?php include('../sharesession.php'); ?>
+            <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
           </li>
+          
+        </ul>
+      </li> -->
+          <li>
+            <?php include('../shareadminMenu.php'); ?>
+          </li>
+
           <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->

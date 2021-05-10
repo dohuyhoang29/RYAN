@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li>
             <?php include('../sharesession.php'); ?>
           </li>
-          <!-- user login dropdown end -->
+          
         </ul>
         <!-- notificatoin dropdown end-->
       </div>

@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Edit Admin</title>
+  <title>Delete Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -188,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  
+
   <section id="container" class="">
 
 
@@ -204,14 +204,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          <?php if (!isset($_SESSION['username'])) :
-            redirect_to('login.php');
-          endif; ?>
 
+          <?php if(!isset($_SESSION['username'])):
+            redirect_to('LogoutRYAN.php');
+          endif;?>
           <li>
             <?php include('../sharesession.php'); ?>
           </li>
-          <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
       </div>

@@ -14,7 +14,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Index Service</title>
+  <title></title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -60,12 +60,11 @@ require_once('../initialize.php');
         <ul class="nav pull-right top-menu">
 
 
-          <?php if (!isset($_SESSION['username'])) :
-            redirect_to('../Admin/login.php');
-          endif; ?>
+          <li class="dropdown">
 
           <li>
             <?php include('../sharesession.php'); ?>
+          </li>
           </li>
           <!-- user login dropdown end -->
         </ul>

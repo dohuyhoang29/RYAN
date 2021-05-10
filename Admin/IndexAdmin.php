@@ -31,7 +31,12 @@
 </head>
 
 <body>
-  
+  <!-- 
+    <?php
+      // if (!isset($_SESSION['username'])) :
+      //   redirect_to('login.php');
+      // endif;
+    ?> -->
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -48,13 +53,12 @@
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
 
-          <?php if(!isset($_SESSION['username'])):
-              redirect_to('LogoutRYAN.php');
-            endif;?>
-          <li>
-            <?php include('../sharesession.php'); ?>
-          </li>
-          <!-- user login dropdown end -->
+        <?php if(!isset($_SESSION['username'])):
+          redirect_to('LogoutRYAN.php');
+        endif;?>
+        <li>
+          <?php include('../sharesession.php'); ?>
+        </li>
         </ul>
         <!-- notificatoin dropdown end-->
       </div>
@@ -133,6 +137,7 @@
                     <th><i class="icon_profile"></i> User Name</th>
                     <th><i class="icon_calendar"></i> Password</th>
                     <th><i class="icon_mail_alt"></i> Full Name</th>
+
                     <th><i class="icon_mobile"></i> Phone</th>
                     <th><i class="icon_pin_alt"></i> email</th>
                   </tr>
@@ -188,7 +193,6 @@
 </body>
 
 </html>
-
 <?php
-  db_disconnect($db);
+db_disconnect($db);
 ?>

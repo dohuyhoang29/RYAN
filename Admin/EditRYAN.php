@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <!-- <link rel="shortcut icon" href="../img/nen2.jpg"> -->
+  <link rel="shortcut icon" href="img/nen2.jpg">
 
   <title>Edit Admin</title>
 
@@ -238,15 +238,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
-        <?php
-          if (!isset($_SESSION['username'])) :
-            redirect_to('login.php');
-          endif;
-          ?>
+
+          <?php if(!isset($_SESSION['username'])):
+            redirect_to('LogoutRYAN.php');
+          endif;?>
           <li>
             <?php include('../sharesession.php'); ?>
           </li>
-          <!-- user login dropdown end -->
         </ul>
         <!-- notificatoin dropdown end-->
       </div>
@@ -389,8 +387,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 
     <br><br>
-    <!-- <script src="../js/jquery-2.2.4.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script> -->
+    <script src="../js/jquery-2.2.4.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/jquery-ui-1.10.4.min.js"></script>
     <script src="../js/jquery-1.8.3.min.js"></script>
