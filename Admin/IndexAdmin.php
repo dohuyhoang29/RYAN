@@ -1,6 +1,6 @@
 <?php
-require_once('DatabaseAdmin.php');
-require_once('../initialize.php');
+  require_once('DatabaseAdmin.php');
+  require_once('../initialize.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

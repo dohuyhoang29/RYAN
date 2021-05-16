@@ -8,7 +8,6 @@ function isFormValidated()
   global $errors;
   return count($errors) == 0;
 }
-//alkdjlfajsl;fjas;lkf
 
 // function checkForm()
 // {
@@ -187,9 +186,87 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
+<<<<<<< HEAD
   <section id="container" class="">
 
     <?php include_once('../header.php'); ?>
+=======
+
+  <section id="container" class="">
+
+
+    <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
+      <!--logo end-->
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->
+        <ul class="nav pull-right top-menu">
+
+
+          <?php if(!isset($_SESSION['username'])):
+            redirect_to('LogoutRYAN.php');
+          endif;?>
+          <li>
+            <?php include('../sharesession.php'); ?>
+          </li>
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="active">
+            <a class="" href="../home.php">
+              <i class="icon_house_alt"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+              <li><a class="" href="NewAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/NewService.php">Service</a></li>
+              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
+              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
+            </ul>
+          </li>
+
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+              <i class="icon_table"></i>
+              <span>Index</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+              <li><a class="" href="IndexAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/IndexService.php">Service</a></li>
+              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
+              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
+            </ul>
+          </li>
+
+
+
+        </ul>
+
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+>>>>>>> 93f67a27f17e7550a0ae0d311573f193d6ef3a6c
 
     <br><br>
     <section id="main-content">

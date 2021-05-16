@@ -31,7 +31,7 @@ function isFormValidated()
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/ronaldo.jpg">
 
-  <title>Login Page </title>
+  <title>Login </title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">

@@ -43,6 +43,87 @@ require_once('../initialize.php');
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+  <!-- container section start -->
+  <section id="container" class="">
+
+
+    <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
+      <!--logo end-->
+      <!--logo end-->
+
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->
+        <ul class="nav pull-right top-menu">
+
+
+          <?php if (!isset($_SESSION['username'])) :
+            redirect_to('../Admin/login.php');
+          endif; ?>
+
+          <li>
+            <?php include('../sharesession.php'); ?>
+          </li>
+
+
+
+        </ul>
+        </li>
+        <!-- user login dropdown end -->
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="active">
+            <a class="" href="../home.php">
+              <i class="icon_house_alt"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+              <i class="icon_document_alt"></i>
+              <span>Forms</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/NewService.php">Service</a></li>
+              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
+              <li><a class="" href="NewCategories.php">Categories</a></li>
+            </ul>
+          </li>
+
+          <li class="sub-menu">
+            <a href="javascript:;" class="">
+              <i class="icon_table"></i>
+              <span>Index</span>
+              <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
+              <li><a class="" href="../Service/IndexService.php">Service</a></li>
+              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
+              <li><a class="" href="IndexCategories.php">Categories</a></li>
+            </ul>
+          </li>
+
+>>>>>>> 93f67a27f17e7550a0ae0d311573f193d6ef3a6c
 
   <section id="container" class="">
 

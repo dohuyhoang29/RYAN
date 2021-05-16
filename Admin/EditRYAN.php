@@ -30,9 +30,14 @@ function checkForm()
   if (empty($_POST['password'])) {
     $errors[] = 'Password is required';
   }
-  if (empty($_POST['password'])) {
-    $errors[] = 'Password is required';
-  }
+
+  // if(sha1($_POST['password']) != sha1($_POST['new'])){
+  //   $error[] = 'mk sai';
+  // }
+  // if(!sha1($_POST['password'])) {
+  //   $error[] = 'mk sai';
+  // }
+
   if (empty($_POST['new'])) {
     $errors[] = 'Password is required';
   }
@@ -318,8 +323,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     </section>
 
     <br><br>
-    <script src="../js/jquery-2.2.4.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+ 
     <script src="../js/jquery.js"></script>
     <script src="../js/jquery-ui-1.10.4.min.js"></script>
     <script src="../js/jquery-1.8.3.min.js"></script>
