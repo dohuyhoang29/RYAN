@@ -13,7 +13,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Admin</title>
+  <title>Index Admin</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -27,105 +27,14 @@ require_once('../initialize.php');
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-  <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body>
-  <!-- 
-    <?php
-      // if (!isset($_SESSION['username'])) :
-      //   redirect_to('login.php');
-      // endif;
-    ?> -->
-  <!-- container section start -->
+  
   <section id="container" class="">
-    <!--header start-->
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
 
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
+    <?php include_once('../header.php'); ?>
 
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-
-
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-
-    <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
@@ -182,9 +91,9 @@ require_once('../initialize.php');
         </div>
       </section>
     </section>
-    <!--main content end-->
+
   </section>
-  <!-- container section end -->
+
   <!-- javascripts -->
   <script src="../js/jquery.js"></script>
   <script src="../js/bootstrap.min.js"></script>

@@ -5,13 +5,13 @@ require_once('../initialize.php');
 
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-  
+
   $picture = [];
   $picture['PictureID'] = $_POST['PictureID'];
   $picture['Name'] = $_POST['Name'];
   $picture['URL'] = $_POST['URL'];
   $picture['ServiceID'] = $_POST['ServiceID'];
- 
+
   Delete_Picture($picture);
   redirect_to('IndexPicture.php');
 } else { // form loaded
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Edit Pictures</title>
+  <title>Delete Pictures</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -155,95 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <section id="container" class="">
 
 
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          <!-- <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="profile-ava">
-                            <img alt="" src="img/avatar01.jpg">
-                        </span>
-                        <span class="username"></span>
-                        <b class="caret"></b>
-                    </a>
-        <ul class="dropdown-menu extended logout">
-          <div class="log-arrow-up"></div>
-          <li class="eborder-top">
-            
-          <li>
-            <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
-          </li>
-          
-        </ul>
-      </li> -->
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
-
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+  <?php include_once('../header.php'); ?>
 
     <section id="main-content">
       <section class="wrapper">
@@ -257,7 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
@@ -311,13 +222,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
                       <div class="col-lg-offset-2 col-lg-10">
 
                         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                      <div class="col-lg-offset-2 col-lg-10">
-                      
-                        <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
+                          <div class="col-lg-offset-2 col-lg-10">
 
-                        <input class="btn btn-primary" type="submit" value="Delete" name="submit"></input>
-                      </div>
-                      </form>
+                            <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
+
+                            <input class="btn btn-primary" type="submit" value="Delete" name="submit"></input>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </form>
@@ -326,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </section>
           </div>
         </div>
-        <!-- page end-->
+
       </section>
     </section>
 

@@ -2,6 +2,34 @@
 require_once('DatabaseService.php');
 require_once('../initialize.php');
 
+$error = [];
+
+function checkForm()
+{
+  global $error;
+
+  if (empty('Name')) {
+    $error[] = 'Name must be required';
+  }
+
+  if (empty('Time')) {
+    $error[] = 'Time must be required';
+  }
+
+  if (empty('Famous_Players')) {
+    $error[] = 'Famous Players must be required';
+  }
+
+  if (empty('Rules')) {
+    $error[] = 'Rules must be required';
+  }
+}
+function isFormValidated()
+{
+  global $error;
+
+  return count($error) == 0;
+}
 
 ?>
 
@@ -16,7 +44,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title></title>
+  <title>New Service</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -30,111 +58,17 @@ require_once('../initialize.php');
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-  <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body>
-  <!-- container section start -->
+
   <section id="container" class="">
-    <!--header start-->
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
 
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
+    <?php include_once('../header.php'); ?>
 
-      <!-- <div class="nav search-row" id="top_menu">
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
-            </form>
-          </li>
-        </ul>
-      </div> -->
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-          <!-- task notificatoin start -->
-          
-          <!-- alert notification end-->
-          <!-- user login dropdown start-->
-          <li class="dropdown">
-            
-          <li>
-            <?php include('../sharesession.php'); ?> 
-          </li>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-                <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-
-    <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
+
         <div class="row">
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-o"></i> Form Service</h3>
@@ -145,7 +79,6 @@ require_once('../initialize.php');
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
@@ -154,40 +87,67 @@ require_once('../initialize.php');
                 Enter Form Admin
               </header>
               <div class="panel-body">
+                <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && isFormValidated()) : ?>
+                  <?php
+                  $service = [];
+                  $service['Name'] = $_POST['Name'];
+                  $service['Rules'] = $_POST['Rules'];
+                  $service['Time'] = $_POST['Time'];
+                  $service['Famous_Players'] = $_POST['Famous_Players'];
+                  $service['CategoryID'] = $_POST['CategoryID'];
+
+                  $result = insert_service($service);
+                  $newServiceID = mysqli_insert_id($db);
+
+                  ?>
+                  <h4>You have successfully created a Service</h4>
+                <?php endif; ?>
                 <div class="form">
-                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " onsubmit="return isFormValidation()" id="register_form" method="post">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="Name" type="text" />
+                        <input class=" form-control" id="name" name="Name" type="text" />
+                        <span id="errorName"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <select class="form-control " id="password" name="CategoryID">
-                          <option value="1" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
-                          <option value="2" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
-                          <option value="3" <?php if (!empty($_POST['CategoryID']) && $_POST['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                        <select class="form-control " id="categories" name="CategoryID">\
+                          <?php
+                          $categories_set = find_all_categories();
+                          $count = mysqli_num_rows($categories_set);
+                          for ($i = 0; $i < $count; $i++) :
+                            $categories = mysqli_fetch_assoc($categories_set);
+                          ?>
+                            <option value="<?php echo $categories['CategoryID']; ?>" <?php if(!empty($_POST['CategoryID']) && $_POST['CategoryID'] == $categories['CategoryID']) echo 'selected'; ?>><?php echo $categories['Name']; ?></option>
+                          <?php
+                          endfor;
+                          mysqli_free_result($categories_set);
+                          ?>
                         </select>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Time <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="password" name="Time" type="text" />
+                        <input class="form-control " id="time" name="Time" type="text" />
+                        <span id="errorTime"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Famous_Players <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="email" name="Famous_Players" type="text" />
+                        <input class="form-control " id="famous" name="Famous_Players" type="text" />
+                        <span id="errorFamous"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Rules <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <textarea class="form-control " id="phone" name="Rules" type="text"></textarea>
+                        <textarea class="form-control " id="rules" name="Rules" type="text"></textarea>
+                        <span id="errorRules"></span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -202,42 +162,77 @@ require_once('../initialize.php');
             </section>
           </div>
         </div>
-        <!-- page end-->
+
       </section>
     </section>
-    <!--main content end-->
-  </section>
-  <!-- container section end -->
 
-  <!-- javascripts -->
+  </section>
+
+
   <script src="../js/jquery.js"></script>
   <script src="../js/bootstrap.min.js"></script>
-  <!-- nice scroll -->
+
   <script src="../js/jquery.scrollTo.min.js"></script>
   <script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
-  <!-- jquery validate js -->
+
   <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 
-  <!-- custom form validation script for this page-->
+
   <script src="../js/form-validation-script.js"></script>
-  <!--custome script for all page-->
+
   <script src="../js/scripts.js"></script>
 
-  <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') : ?>
-    <?php
-    $service = [];
-    $service['Name'] = $_POST['Name'];
-    $service['Rules'] = $_POST['Rules'];
-    $service['Time'] = $_POST['Time'];
-    $service['Famous_Players'] = $_POST['Famous_Players'];
-    $service['CategoryID'] = $_POST['CategoryID'];
+  <script>
+    function isFormValidation() {
+      // lay gia tri cua cac input
+      var name = document.getElementById('name').value;
+      var categories = document.getElementById('categories').value;
+      var time = document.getElementById('time').value;
+      var famous = document.getElementById('famous').value;
+      var rules = document.getElementById('rules').value;
 
-    $result = insert_service($service);
-    
-    
-    ?>
-  <?php endif; ?>
+      // kiem tra du lieu
 
+      if (name == '') {
+        document.getElementById('errorName').innerHTML = 'Name cannot be left blank';
+        document.getElementById('errorName').style.color = 'red';
+        document.getElementById('name').style.border = '1px solid red';
+      } else {
+        document.getElementById('errorName').innerHTML = '';
+        document.getElementById('name').style.border = '1px solid #ceced2';
+      }
+      if (time == '') {
+        document.getElementById('errorTime').innerHTML = 'Time cannot be left blank';
+        document.getElementById('errorTime').style.color = 'red';
+        document.getElementById('time').style.border = '1px solid red';
+      } else {
+        document.getElementById('errorTime').innerHTML = '';
+        document.getElementById('time').style.border = '1px solid #ceced2';
+      }
+      if (famous == '') {
+        document.getElementById('errorFamous').innerHTML = 'Famous Players cannot be left blank';
+        document.getElementById('errorFamous').style.color = 'red';
+        document.getElementById('famous').style.border = '1px solid red';
+      } else {
+        document.getElementById('errorFamous').innerHTML = '';
+        document.getElementById('famous').style.border = '1px solid #ceced2';
+      }
+      if (rules == '') {
+        document.getElementById('errorRules').innerHTML = 'Famous Players cannot be left blank';
+        document.getElementById('errorRules').style.color = 'red';
+        document.getElementById('rules').style.border = '1px solid red';
+      } else {
+        document.getElementById('errorRules').innerHTML = '';
+        document.getElementById('rules').style.border = '1px solid #ceced2';
+      }
+      if (name != '' && time != '' && famous != '' && rules != '') {
+
+        return true;
+      }
+
+      return false;
+    }
+  </script>
 
 </body>
 

@@ -99,5 +99,16 @@ function Delete_Picture($picture) {
     return confirm_query_result($result);
 }
 
+function find_all_service(){
+    global $db;
+
+    $sql = "SELECT * FROM service;";
+
+    $result = mysqli_query($db, $sql);
+
+    return confirm_query_result($result);
+
+}
+
 
 ?>

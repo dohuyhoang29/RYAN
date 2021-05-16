@@ -44,12 +44,25 @@ function isFormValidated()
   <!-- Custom styles -->
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
+  <style>
+    .login-img3-body{
+
+      background: url('../img/bg-2.jpg') no-repeat center center fixed;
+
+      -webkit-background-size: cover; /*hỗ trợ cho chrome*/
+
+      -moz-background-size: cover;/*hỗ trợ cho firefox*/
+
+      -o-background-size: cover;  /*hỗ trợ cho opera*/
+
+      background-size: cover;
+    }
+  </style>
 
 </head>
 
 <body class="login-img3-body">
-
-  <div class="container">
+  <div class="container ">
 
     <form class="login-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
       <div class="login-wrap">
@@ -63,7 +76,8 @@ function isFormValidated()
           <input type="password" class="form-control" placeholder="Password" name="password">
         </div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-        <button class="btn btn-info btn-lg btn-block" type="submit"><a href="NewAdmin.php">Sign up</a></button>
+        <!-- <button class="btn btn-primary btn-lg btn-block" type="submit">Sign up</button> -->
+        <a class="sign_up" href="./Signup.php"><img style="width: 100%; height: 100%;" src="../img/signup.png" onmouseover="this.src='../img/signup-hover.png'" onmouseout="this.src='../img/signup.png'"></a>
       </div>
     </form>
 
@@ -99,8 +113,6 @@ function isFormValidated()
     ?>
 
   </div>
-
-
 </body>
 
 </html>

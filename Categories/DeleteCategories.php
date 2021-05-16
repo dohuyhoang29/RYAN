@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/nen2.jpg">
 
-  <title>Edit Categoires</title>
+  <title>Delete Categoires</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -81,91 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-  <!-- container section start -->
+
   <section id="container" class="">
 
+  <?php include_once('../header.php'); ?>
 
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          <li class="dropdown">
-            
-            <?php include('../shareadminMenu.php') ?>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures//IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-
-    <!--main content start-->
-    <section id="main-content">
-
-      <div class="text-right">
-        <div class="credits">
-
-        </div>
-      </div>
-    </section>
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
@@ -178,8 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
-        
+
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
@@ -188,30 +107,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
                     <input type="hidden" name="CategoryID" value="<?php echo $categories['CategoryID']; ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input disabled class=" form-control" id="fullname" name="name" type="text" value="<?php echo $categories['Name'];?>" />
+                        <input disabled class=" form-control" id="fullname" name="name" type="text" value="<?php echo $categories['Name']; ?>" />
                       </div>
                     </div>
-                      <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" type="reset">Cancel</button>
-                      </div>
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-primary" type="submit">Save</button>
+                      <button class="btn btn-default" type="reset">Cancel</button>
                     </div>
-                  </form>
                 </div>
+                </form>
               </div>
-            </section>
           </div>
-        </div>
-        <!-- page end-->
       </section>
+      </div>
+      </div>
     </section>
   </section>
-  <!-- container section start -->
+  </section>
 
   <!-- javascripts -->
   <script src="../js/jquery-2.2.4.min.js"></script>

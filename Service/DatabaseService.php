@@ -104,4 +104,14 @@
 
         return confirm_query_result($result);
     }
+
+    function find_all_categories(){
+        global $db;
+
+        $sql = "SELECT * FROM categories;";
+
+        $result = mysqli_query($db, $sql);
+
+        return confirm_query_result($result);
+    }
 ?>

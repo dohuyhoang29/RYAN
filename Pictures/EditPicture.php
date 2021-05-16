@@ -54,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <head>
   <meta charset="utf-8" />
-  <title>Edit Picture</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -180,101 +179,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   <section id="container" class="">
 
 
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          <!-- <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="profile-ava">
-                            <img alt="" src="img/avatar01.jpg">
-                        </span>
-                        <span class="username"></span>
-                        <b class="caret"></b>
-                    </a>
-        <ul class="dropdown-menu extended logout">
-          <div class="log-arrow-up"></div>
-          <li class="eborder-top">
-            
-          <li>
-            <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
-          </li>
-          
-        </ul>
-      </li> -->
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
-
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+  <?php include_once('../header.php'); ?>
 
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-user-o"></i> Form Pictures</h3>
+            <h3 class="page-header"><i class="fa fa-user-o"></i> Edit Pictures</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="../home.php">Home</a></li>
               <li><i class="icon_document_alt"></i><a href="IndexPicture.php">Forms</a></li>
@@ -282,7 +193,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
@@ -292,44 +202,37 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
-                  <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return isFormValidation();" class="form-validate form-horizontal " id="register_form" method="post">
+                    <input type="hidden" name="PictureID" value="<?php echo $picture['PictureID'] ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="Name" type="text" value="<?php echo isFormValidated() ? $picture['Name'] : $_POST['Name'] ?>" />
+                        <input class=" form-control" id="name" name="Name" type="text" value="<?php echo isFormValidated() ? $picture['Name'] : $_POST['Name'] ?>" />
+                        <span id="errorName"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Picture <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="username" name="URL" type="file" />
-                        <img style="width: 100%; height: 100%;" src="<?php echo $picture['URL']; ?>">
+                        <input class="form-control " id="url" name="URL" type="file" />
+                        <span id="errorURL"></span>
+                        <img style="width: 100%; height: 100%;" src="<?php echo '../img/' . $picture['URL']; ?>">
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Sport <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <select class="form-control " id="password" name="ServiceID">
-                          <option value="1" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '1') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "1")) echo 'selected' ?>>Cầu Lông</option>
-                          <option value="2" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '2') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "2")) echo 'selected' ?>>Bóng Chuyền</option>
-                          <option value="3" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == "3") || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "3")) echo 'selected' ?>>Bóng Rổ</option>
-                          <option value="4" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == "4") || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "4")) echo 'selected' ?>>Đấu Kiếm</option>
-                          <option value="5" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '5') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "5")) echo 'selected' ?>>Bóng Bàn</option>
-                          <option value="6" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '6') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "6")) echo 'selected' ?>>Đá Cầu</option>
-                          <option value="7" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '7') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "7")) echo 'selected' ?>>Bóng Đá</option>
-                          <option value="8" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '8') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "8")) echo 'selected' ?>>Quần Vợt</option>
-                          <option value="9" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '9') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "9")) echo 'selected' ?>>Nhảy xa</option>
-                          <option value="10" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '10') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] = "10")) echo 'selected' ?>>Bóng Chày</option>
-                          <option value="11" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '11') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "11")) echo 'selected' ?>>Điền Kinh</option>
-                          <option value="12" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '12') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "12")) echo 'selected' ?>>Bơi Lội</option>
-                          <option value="14" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '13') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "13")) echo 'selected' ?>>Food</option>
-                          <option value="15" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '14') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "14")) echo 'selected' ?>>Massage</option>
-                          <option value="15" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '15') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "15")) echo 'selected' ?>>Bi-a</option>
-                          <option value="16" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '16') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "16")) echo 'selected' ?>>Bar</option>
-                          <option value="17" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '17') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "17")) echo 'selected' ?>>Xông Hơi</option>
-                          <option value="18" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '18') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "18")) echo 'selected' ?>>Yoga</option>
-                          <option value="19" <?php if ((!empty($picture['ServiceID']) && $picture['ServiceID'] == '19') || (!empty($_POST['ServiceID']) && $_POST['ServiceID'] == "19")) echo 'selected' ?>>Movie</option>
+                          <?php
+                          $service_set = find_all_service();
+                          $count = mysqli_num_rows($service_set);
+                          for ($i = 0; $i < $count; $i++) :
+                            $service = mysqli_fetch_assoc($service_set);
+                          ?>
+                            <option value="<?php echo $service['ServiceID']; ?>" <?php if (!empty($picture['ServiceID']) && $picture['ServiceID'] == $service['ServiceID'] || !empty($_POST['ServiceID']) && $_POST['ServiceID'] == $service['ServiceID']) echo 'selected'; ?>><?php echo $service['Name'] ?></option>
+                          <?php
+                          endfor;
+                          ?>
                         </select>
                       </div>
                     </div>
@@ -346,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </section>
           </div>
         </div>
-        <!-- page end-->
+
       </section>
     </section>
 
@@ -392,6 +295,35 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <script src="../js/sparklines.js"></script>
     <script src="../js/charts.js"></script>
     <script src="../js/jquery.slimscroll.min.js"></script>
+    <script>
+      function isFormValidation() {
+        var name = document.getElementById('name').value;
+        var url = document.getElementById('url').value;
+
+        if (name == '') {
+          document.getElementById('errorName').innerHTML = 'Name cannot be left blank';
+          document.getElementById('errorName').style.color = 'red';
+          document.getElementById('name').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorName').innerHTML = '';
+          document.getElementById('name').style.border = '1px solid #ceced2';
+        }
+        if (url == '') {
+          document.getElementById('errorURL').innerHTML = 'Picture cannot be left blank';
+          document.getElementById('errorURL').style.color = 'red';
+          document.getElementById('url').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorURL').innerHTML = '';
+          document.getElementById('url').style.border = '1px solid #ceced2';
+        }
+
+        if (name != '' && url != '') {
+          return true;
+        }
+
+        return false;
+      }
+    </script>
 </body>
 
 </html>

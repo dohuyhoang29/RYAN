@@ -1,8 +1,21 @@
 <?php
-  require_once('DatabaseCategories.php');
-  require_once('../initialize.php');
+require_once('DatabaseCategories.php');
+require_once('../initialize.php');
 
- 
+$error = [];
+
+function isFormValidated(){
+  global $error;
+
+  return count($error) == 0;
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if(empty($_POST['name'])){
+    $error[] = '';
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +29,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title></title>
+  <title>New Categories</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -30,100 +43,14 @@
   <link href="../css/style.css" rel="stylesheet">
   <link href="../css/style-responsive.css" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body>
-  <!-- container section start -->
+
   <section id="container" class="">
-    <!--header start-->
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
 
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
+    <?php include_once('../header.php'); ?>
 
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-          <!-- task notificatoin start -->
-          
-          <!-- alert notification end-->
-          <!-- user login dropdown start-->
-          <li class="dropdown">
-          <li>
-            <p class="fa fa-user-o"></p>
-            <?php include('../sharesession.php'); ?> 
-          </li>
-            
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-                          <i class="icon_house_alt"></i>
-                          <span>Home</span>
-                      </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>Forms</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-                <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-
-    <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
@@ -136,8 +63,7 @@
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
-        
+
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
@@ -146,30 +72,41 @@
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action = "<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return isFormValidation();" class="form-validate form-horizontal " id="register_form" method="post">
                     <div class="form-group ">
+                      <?php if ($_SERVER["REQUEST_METHOD"] == 'POST') : ?>
+                        <?php
+                        $categories = [];
+                        $categories['name'] = $_POST['name'];
+
+                        $result = insert_categories($categories);
+                        $NewcategoriesID = mysqli_insert_id($db);
+
+                        ?>
+                      <?php endif; ?>
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="name" type="text" />
+                        <input class=" form-control" id="name" name="name" type="text" />
+                        <span id="errorName"></span>
                       </div>
                     </div>
-                      <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <button class="btn btn-default" type="reset">Cancel</button>
-                      </div>
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button class="btn btn-primary" type="submit">Save</button>
+                      <button class="btn btn-default" type="reset">Cancel</button>
                     </div>
-                  </form>
                 </div>
+                </form>
               </div>
-            </section>
           </div>
-        </div>
-        <!-- page end-->
       </section>
+      </div>
+      </div>
+
     </section>
-    <!--main content end-->
   </section>
-  <!-- container section end -->
+
+  </section>
+
 
   <!-- javascripts -->
   <script src="../js/jquery.js"></script>
@@ -184,18 +121,24 @@
   <script src="../js/form-validation-script.js"></script>
   <!--custome script for all page-->
   <script src="../js/scripts.js"></script>
+  
+  <script>
+    var name = document.getElementById('name').value;
 
-  <?php if ($_SERVER["REQUEST_METHOD"] == 'POST'): ?>
-            <?php
-                $categories = [];
-                $categories['name'] = $_POST['name'];
+    function isFormValidation(){
+      if(name == ''){
+        document.getElementById('errorName').innerHTML = 'Name cannot be left blank';
+        document.getElementById('errorName').style.color = 'red';
+        document.getElementById('name').style.border = '1px solid red';
+      } else {
+        document.getElementById('errorName').innerHTML = '';
+        document.getElementById('name').style.border = '1px solid #ceced2';
+        return true;
+      }
+      return false;
+    }
+  </script>
 
-                $result = insert_categories($categories);
-                $NewcategoriesID = mysqli_insert_id($db);
-            
-            ?>
-            00
-        <?php endif; ?>
 
 
 </body>
@@ -203,5 +146,5 @@
 </html>
 
 <?php
-  db_disconnect($db);
+db_disconnect($db);
 ?>

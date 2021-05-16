@@ -7,6 +7,22 @@ $error = [];
 function checkForm()
 {
   global $error;
+
+  if (empty('Name')) {
+    $error[] = 'Name must be required';
+  }
+
+  if (empty('Time')) {
+    $error[] = 'Time must be required';
+  }
+
+  if (empty('Famous_Players')) {
+    $error[] = 'Famous Players must be required';
+  }
+
+  if (empty('Rules')) {
+    $error[] = 'Rules must be required';
+  }
 }
 
 function isFormValidated()
@@ -16,14 +32,14 @@ function isFormValidated()
   return count($error) == 0;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isFormValidated()) {
   checkForm();
 
   if (isFormValidated()) {
     $service = [];
     $service['ServiceID'] = $_POST['ServiceID'];
     $service['Name'] = $_POST['Name'];
-    $service['Rules'] = $_POST['Rules'];
+    $service['Rules'] = htmlspecialchars($_POST['Rules'], ENT_QUOTES);
     $service['Time'] = $_POST['Time'];
     $service['Famous_Players'] = $_POST['Famous_Players'];
     $service['CategoryID'] = $_POST['CategoryID'];
@@ -53,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Creative - Bootstrap Admin Template</title>
+  <title>Edit Service</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -82,98 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-  <!-- container section start -->
+
   <section id="container" class="">
+    <?php include_once('../header.php'); ?>
 
 
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
-
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-
-    <!--main content start-->
-    <section id="main-content">
-
-      <div class="text-right">
-        <div class="credits">
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-          -->
-
-        </div>
-      </div>
-    </section>
-    <!--main content end-->
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
@@ -186,7 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
 
         <div class="row">
           <div class="col-lg-12">
@@ -196,40 +124,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " id="register_form" method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return isFormValidation()" class="form-validate form-horizontal " id="register_form" method="post">
                     <input type="hidden" name="ServiceID" value="<?php echo $service['ServiceID'] ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Name <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="Name" type="text" value="<?php echo isFormValidated() ? $service['Name'] : $service['Name']; ?>" />
+                        <input class=" form-control" id="name" name="Name" type="text" value="<?php echo isFormValidated() ? $service['Name'] : $service['Name']; ?>" />
+                        <span id="errorName"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Categories <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <select class="form-control " id="password" name="CategoryID">
-                          <option value="1" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == '1') echo 'selected' ?>>Indoor Sports</option>
-                          <option value="2" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == '2') echo 'selected' ?>>OutDoor Sports</option>
-                          <option value="3" <?php if (!empty($service['CategoryID']) && $service['CategoryID'] == "3") echo 'selected' ?>>Recreation </option>
+                        <select class="form-control " id="categories" name="CategoryID">
+                          <?php
+                          $categories_set = find_all_categories();
+                          $count = mysqli_num_rows($categories_set);
+                          for ($i = 0; $i < $count; $i++) :
+                            $categories = mysqli_fetch_assoc($categories_set);
+                          ?>
+                          <option value="<?php echo $categories['CategoryID']; ?>" <?php if(!empty($service['CategoryID']) && $service['CategoryID'] == $categories['CategoryID'] || !empty($_POST['CategoryID']) && $_POST['CategoryID'] == $categories['CategoryID']) echo 'selected'; ?>><?php echo $categories['Name']; ?></option>
+                          <?php
+                          endfor;
+                          mysqli_free_result($categories_set);
+                          ?>
                         </select>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">Time <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="password" name="Time" type="text" value="<?php echo isFormValidated() ? $service['Time'] : $_POST['Time'] ?>"/>
+                        <input class="form-control " id="time" name="Time" type="text" value="<?php echo isFormValidated() ? $service['Time'] : $_POST['Time'] ?>" />
+                        <span id="errorTime"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Famous_Players <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " id="email" name="Famous_Players" type="text" value="<?php echo isFormValidated() ? $service['Famous_Players'] : $_POST['Famous_Players'] ?>"/>
+                        <input class="form-control " id="famous" name="Famous_Players" type="text" value="<?php echo isFormValidated() ? $service['Famous_Players'] : $_POST['Famous_Players'] ?>" />
+                        <span id="errorFamous"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Rules <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <textarea class="form-control " id="phone" name="Rules" type="text"><?php echo isFormValidated() ? $service['Rules'] : $_POST['Rules'] ?></textarea>
+                        <textarea class="form-control " id="rules" name="Rules" type="text"><?php echo isFormValidated() ? $service['Rules'] : $_POST['Rules'] ?></textarea>
+                        <span id="errorRules"></span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -244,14 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </section>
           </div>
         </div>
-        <!-- page end-->
+
       </section>
     </section>
     </div>
     </div>
   </section>
   </section>
-  <!-- container section start -->
 
   <!-- javascripts -->
   <script src="../js/jquery.js"></script>
@@ -269,32 +208,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="../js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="../js/fullcalendar.min.js">
-    </script>
-    <!-- Full Google Calendar - Calendar -->
-    <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-    <!--script for this page only-->
-    <script src="../js/calendar-custom.js"></script>
-    <script src="../js/jquery.rateit.min.js"></script>
-    <!-- custom select -->
-    <script src="../js/jquery.customSelect.min.js"></script>
-    <script src="../assets/chart-master/Chart.js"></script>
+  <script src="../js/fullcalendar.min.js"></script>
+  <!-- Full Google Calendar - Calendar -->
+  <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+  <!--script for this page only-->
+  <script src="../js/calendar-custom.js"></script>
+  <script src="../js/jquery.rateit.min.js"></script>
+  <!-- custom select -->
+  <script src="../js/jquery.customSelect.min.js"></script>
+  <script src="../assets/chart-master/Chart.js"></script>
 
-    <!--custome script for all page-->
-    <script src="../js/scripts.js"></script>
-    <!-- custom script for this page-->
-    <script src="../js/sparkline-chart.js"></script>
-    <script src="../js/easy-pie-chart.js"></script>
-    <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="../js/xcharts.min.js"></script>
-    <script src="../js/jquery.autosize.min.js"></script>
-    <script src="../js/jquery.placeholder.min.js"></script>
-    <script src="../js/gdp-data.js"></script>
-    <script src="../js/morris.min.js"></script>
-    <script src="../js/sparklines.js"></script>
-    <script src="../js/charts.js"></script>
-    <script src="../js/jquery.slimscroll.min.js"></script>
+  <!--custome script for all page-->
+  <script src="../js/scripts.js"></script>
+  <!-- custom script for this page-->
+  <script src="../js/sparkline-chart.js"></script>
+  <script src="../js/easy-pie-chart.js"></script>
+  <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
+  <script src="../js/xcharts.min.js"></script>
+  <script src="../js/jquery.autosize.min.js"></script>
+  <script src="../js/jquery.placeholder.min.js"></script>
+  <script src="../js/gdp-data.js"></script>
+  <script src="../js/morris.min.js"></script>
+  <script src="../js/sparklines.js"></script>
+  <script src="../js/charts.js"></script>
+  <script src="../js/jquery.slimscroll.min.js"></script>
     <script>
       //knob
       $(function() {
@@ -339,6 +277,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         });
       });
+
+      function isFormValidation() {
+        // lay gia tri cua cac input
+        var name = document.getElementById('name').value;
+        var categories = document.getElementById('categories').value;
+        var time = document.getElementById('time').value;
+        var famous = document.getElementById('famous').value;
+        var rules = document.getElementById('rules').value;
+
+        // kiem tra du lieu
+
+        if (name == '') {
+          document.getElementById('errorName').innerHTML = 'Name cannot be left blank';
+          document.getElementById('errorName').style.color = 'red';
+          document.getElementById('name').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorName').innerHTML = '';
+          document.getElementById('name').style.border = '1px solid #ceced2';
+        }
+        if (time == '') {
+          document.getElementById('errorTime').innerHTML = 'Time cannot be left blank';
+          document.getElementById('errorTime').style.color = 'red';
+          document.getElementById('time').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorTime').innerHTML = '';
+          document.getElementById('time').style.border = '1px solid #ceced2';
+        }
+        if (famous == '') {
+          document.getElementById('errorFamous').innerHTML = 'Famous Players cannot be left blank';
+          document.getElementById('errorFamous').style.color = 'red';
+          document.getElementById('famous').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorFamous').innerHTML = '';
+          document.getElementById('famous').style.border = '1px solid #ceced2';
+        }
+        if (rules == '') {
+          document.getElementById('errorRules').innerHTML = 'Famous Players cannot be left blank';
+          document.getElementById('errorRules').style.color = 'red';
+          document.getElementById('rules').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorRules').innerHTML = '';
+          document.getElementById('rules').style.border = '1px solid #ceced2';
+        }
+        if (name != '' && time != '' && famous != '' && rules != '') {
+
+          return true;
+        }
+
+        return false;
+      }
     </script>
 
 </body>

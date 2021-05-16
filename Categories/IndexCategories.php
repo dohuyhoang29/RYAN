@@ -14,7 +14,7 @@ require_once('../initialize.php');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title></title>
+  <title>Index Categories</title>
 
   <!-- Bootstrap CSS -->
   <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -43,92 +43,11 @@ require_once('../initialize.php');
 </head>
 
 <body>
-  <!-- container section start -->
+
   <section id="container" class="">
 
+  <?php include_once('../header.php'); ?>
 
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-      <!--logo end-->
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          <li class="dropdown">
-
-          <li>
-            <?php include('../sharesession.php'); ?>
-          </li>
-
-
-
-        </ul>
-        </li>
-        <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="../Admin/IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-
-    <!--main content start-->
-    <!--main content end-->
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
@@ -141,7 +60,6 @@ require_once('../initialize.php');
             </ol>
           </div>
         </div>
-        <!-- page start-->
 
         <div class="row">
           <div class="col-lg-12">
@@ -180,10 +98,8 @@ require_once('../initialize.php');
             </section>
           </div>
         </div>
-        <!-- page end-->
       </section>
     </section>
-    <!-- container section start -->
 
     <!-- javascripts -->
     <script src="../js/jquery.js"></script>
@@ -201,32 +117,31 @@ require_once('../initialize.php');
     <script src="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="../js/owl.carousel.js"></script>
     <!-- jQuery full calendar -->
-    <<script src="../js/fullcalendar.min.js">
-      </script>
-      <!-- Full Google Calendar - Calendar -->
-      <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-      <!--script for this page only-->
-      <script src="../js/calendar-custom.js"></script>
-      <script src="../js/jquery.rateit.min.js"></script>
-      <!-- custom select -->
-      <script src="../js/jquery.customSelect.min.js"></script>
-      <script src="../assets/chart-master/Chart.js"></script>
+    <script src="../js/fullcalendar.min.js"></script>
+    <!-- Full Google Calendar - Calendar -->
+    <script src="../assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <!--script for this page only-->
+    <script src="../js/calendar-custom.js"></script>
+    <script src="../js/jquery.rateit.min.js"></script>
+    <!-- custom select -->
+    <script src="../js/jquery.customSelect.min.js"></script>
+    <script src="../assets/chart-master/Chart.js"></script>
 
-      <!--custome script for all page-->
-      <script src="../js/scripts.js"></script>
-      <!-- custom script for this page-->
-      <script src="../js/sparkline-chart.js"></script>
-      <script src="../js/easy-pie-chart.js"></script>
-      <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
-      <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
-      <script src="../js/xcharts.min.js"></script>
-      <script src="../js/jquery.autosize.min.js"></script>
-      <script src="../js/jquery.placeholder.min.js"></script>
-      <script src="../js/gdp-data.js"></script>
-      <script src="../js/morris.min.js"></script>
-      <script src="../js/sparklines.js"></script>
-      <script src="../js/charts.js"></script>
-      <script src="../js/jquery.slimscroll.min.js"></script>
+    <!--custome script for all page-->
+    <script src="../js/scripts.js"></script>
+    <!-- custom script for this page-->
+    <script src="../js/sparkline-chart.js"></script>
+    <script src="../js/easy-pie-chart.js"></script>
+    <script src="../js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../js/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../js/xcharts.min.js"></script>
+    <script src="../js/jquery.autosize.min.js"></script>
+    <script src="../js/jquery.placeholder.min.js"></script>
+    <script src="../js/gdp-data.js"></script>
+    <script src="../js/morris.min.js"></script>
+    <script src="../js/sparklines.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/jquery.slimscroll.min.js"></script>
       <script>
         //knob
         $(function() {

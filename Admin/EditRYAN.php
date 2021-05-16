@@ -8,7 +8,6 @@ function isFormValidated()
   global $errors;
   return count($errors) == 0;
 }
-//alkdjlfajsl;fjas;lkf
 
 function checkForm()
 {
@@ -77,11 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $admin['phone'] = $_POST['phone'];
 
     if ($Login['Password'] === sha1($_POST['password'])) {
-    
-    Update_admin($admin);
-    redirect_to('IndexAdmin.php');
-    } else {
-      echo "Username or Password wrong!";
+
+      Update_admin($admin);
+      redirect_to('IndexAdmin.php');
     }
   }
 } else { // form loaded
@@ -98,7 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 <html lang="en">
 
 <head>
-  <title>Edit admin</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -217,106 +213,9 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 <body>
 
-  <?php
-  // if (!isset($_SESSION['username'])) :
-  //   redirect_to('LoginRYAN.php');
-  // endif;
-  ?>
   <section id="container" class="">
 
-
-    <header class="header dark-bg">
-      <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-      </div>
-
-      <!--logo start-->
-      <a href="../home.php" class="logo"><img style="padding-bottom: 10px;" src="../img/L.png" alt=""></a>
-      <!--logo end-->
-
-
-      <div class="top-nav notification-row">
-        <!-- notificatoin dropdown start-->
-        <ul class="nav pull-right top-menu">
-
-
-          <!-- <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="profile-ava">
-                            <img alt="" src="img/avatar01.jpg">
-                        </span>
-                        <span class="username"></span>
-                        <b class="caret"></b>
-                    </a>
-        <ul class="dropdown-menu extended logout">
-          <div class="log-arrow-up"></div>
-          <li class="eborder-top">
-            
-          <li>
-            <a href="login.php"><i class="icon_key_alt"></i> Log Out</a>
-          </li>
-          
-        </ul>
-      </li> -->
-          <!-- <li>
-        
-      </li> -->
-          <li>
-            <?php include('../shareadminMenu.php'); ?>
-          </li>
-          <!-- user login dropdown end -->
-        </ul>
-        <!-- notificatoin dropdown end-->
-      </div>
-    </header>
-    <!--header end-->
-
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="../home.php">
-              <i class="icon_house_alt"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_document_alt"></i>
-              <span>Forms</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="NewAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/NewService.php">Service</a></li>
-              <li><a class="" href="../Pictures/NewPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/NewCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_table"></i>
-              <span>Index</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
-            </a>
-            <ul class="sub">
-              <li><a class="" href="IndexAdmin.php">Admin</a></li>
-              <li><a class="" href="../Service/IndexService.php">Service</a></li>
-              <li><a class="" href="../Pictures/IndexPicture.php">Pictures</a></li>
-              <li><a class="" href="../Categories/IndexCategories.php">Categories</a></li>
-            </ul>
-          </li>
-
-
-
-        </ul>
-
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
+  <?php include_once('../header.php'); ?>
 
     <br><br>
     <section id="main-content">
@@ -331,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             </ol>
           </div>
         </div>
-        <!-- Form validations -->
+
 
         <div class="row">
           <div class="col-lg-12">
@@ -341,49 +240,64 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
               </header>
               <div class="panel-body">
                 <div class="form">
-                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="form-validate form-horizontal " method="post">
+                  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return isFormValidation();" class="form-validate form-horizontal " method="post">
                     <input type="hidden" name="username" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
                     <div class="form-group ">
                       <label for="fullname" class="control-label col-lg-2">Full name <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class=" form-control" id="fullname" name="fullname" type="text" value="<?php echo isFormValidated() ? $admin['fullname'] : $_POST['fullname']; ?>">
+                        <span id="errorFullName"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="username" class="control-label col-lg-2">Username <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="username" name="username" type="text" value="<?php echo isFormValidated() ? $admin['username'] : $_POST['username']; ?>">
+                        <span id="errorUserName"></span>
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="password" class="control-label col-lg-2">Password <span class="required">*</span></label>
+                      <label for="password" class="control-label col-lg-2">Current Password <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="password" name="password" type="">
+                        <span id="errorPassword"></span>
+                        <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+                          <?php
+                            $username = $_POST['username'];
+                            $pass = find_usenmae($username);
+                          ?>
+                          <?php if($pass['Password'] !== sha1($_POST['password'])): ?>
+                              <span style="color: red;">The new password is not the same as the old password</span>
+                          <?php endif; ?>
+                        <?php endif; ?>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="new" class="control-label col-lg-2">New Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="new" name="new" type="password" onkeyup='check();' />
+                        <input class="form-control " id="new" name="new" type="password" onkeyup='check();' />
+                        <span id="errorNewPassword"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="confirm" class="control-label col-lg-2">Confirm Password <span class="required">*</span></label>
                       <div class="col-lg-10">
-                        <input class="form-control " required id="confirm" name="confirm" type="password" onkeyup='check();' />
-                        <span id='message'></span>
+                        <input class="form-control " id="confirm" name="confirm" type="password" onkeyup='check();' />
+                        <span id='errorConfirmPassword'></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="email" name="email" type="email" value="<?php echo isFormValidated() ? $admin['email'] : $_POST['email']; ?>">
+                        <span id="errorEmail"></span>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">Phone <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <input class="form-control " id="phone" name="phone" type="text" value="<?php echo isFormValidated() ? $admin['phone'] : $_POST['phone']; ?>">
+                        <span id="errorPhone"></span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -402,9 +316,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <!-- page end-->
       </section>
     </section>
-
-
-
 
     <br><br>
     <script src="../js/jquery-2.2.4.min.js"></script>
@@ -454,12 +365,12 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       var check = function() {
         if (document.getElementById('new').value ==
           document.getElementById('confirm').value) {
-          document.getElementById('message').style.color = 'blue';
-          document.getElementById('message').innerHTML = '';
+          document.getElementById('errorConfirmPassword').style.color = 'blue';
+          document.getElementById('errorConfirmPassword').innerHTML = '';
           document.getElementById('confirm').style.border = '1px solid #ceced2';
         } else {
-          document.getElementById('message').style.color = 'red';
-          document.getElementById('message').innerHTML = 'not Invalid';
+          document.getElementById('errorConfirmPassword').style.color = 'red';
+          document.getElementById('errorConfirmPassword').innerHTML = 'not Invalid';
           document.getElementById('confirm').style.border = '1px solid red';
         }
       }
@@ -469,13 +380,94 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         var secondpassword = document.register.confirm.value;
 
         if (firstpassword == secondpassword) {
-          document.getElementById('message').style.color = 'blue';
-          document.getElementById('message').innerHTML = 'Invalid';
+          document.getElementById('errorConfirmPassword').style.color = 'blue';
+          document.getElementById('errorConfirmPassword').innerHTML = 'Invalid';
           return true;
         } else {
           document.getElementById('confirm').style.border = '1px solid red';
           return false;
         }
+      }
+
+      function isFormValidation() {
+        var fullName = document.getElementById('fullname').value;
+        var  userName = document.getElementById('username').value;
+        var  password = document.getElementById('password').value;
+        var  newPassword = document.getElementById('new').value;
+        var  confirmPassword = document.getElementById('confirm').value;
+        var  email = document.getElementById('email').value;
+        var  phone = document.getElementById('phone').value;
+
+        if (fullName == '') {
+          document.getElementById('errorFullName').innerHTML = 'Full Name cannot be left blank';
+          document.getElementById('errorFullName').style.color = 'red';
+          document.getElementById('fullname').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorFullName').innerHTML = '';
+          document.getElementById('fullname').style.border = '1px solid #ceced2';
+        }
+        if (fullName == '') {
+          document.getElementById('errorUserName').innerHTML = 'User Name cannot be left blank';
+          document.getElementById('errorUserName').style.color = 'red';
+          document.getElementById('username').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorUserName').innerHTML = '';
+          document.getElementById('username').style.border = '1px solid #ceced2';
+        }
+
+        if (password == '') {
+          document.getElementById('errorPassword').innerHTML = 'Current Password cannot be left blank';
+          document.getElementById('errorPassword').style.color = 'red';
+          document.getElementById('password').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorPassword').innerHTML = '';
+          document.getElementById('password').style.border = '1px solid #ceced2';
+        }
+
+        if (newPassword == '') {
+          document.getElementById('errorNewPassword').innerHTML = 'New Password cannot be left blank';
+          document.getElementById('errorNewPassword').style.color = 'red';
+          document.getElementById('new').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorNewPassword').innerHTML = '';
+          document.getElementById('new').style.border = '1px solid #ceced2';
+        }
+
+        if (confirmPassword == '') {
+          document.getElementById('errorConfirmPassword').innerHTML = 'Confirm Password cannot be left blank';
+          document.getElementById('errorConfirmPassword').style.color = 'red';
+          document.getElementById('confirm').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorConfirmPassword').innerHTML = '';
+          document.getElementById('confirm').style.border = '1px solid #ceced2';
+        }
+
+        if (email == '') {
+          document.getElementById('errorEmail').innerHTML = 'Email cannot be left blank';
+          document.getElementById('errorEmail').style.color = 'red';
+          document.getElementById('email').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorEmail').innerHTML = '';
+          document.getElementById('email').style.border = '1px solid #ceced2';
+        }
+
+        if (phone == '') {
+          document.getElementById('errorPhone').innerHTML = 'Phone cannot be left blank';
+          document.getElementById('errorPhone').style.color = 'red';
+          document.getElementById('phone').style.border = '1px solid red';
+        } else {
+          document.getElementById('errorPhone').innerHTML = '';
+          document.getElementById('phone').style.border = '1px solid #ceced2';
+        }
+
+
+        if (fullName != '' && userName != '' && password != '' && newPassword != '' && confirmPassword != '' && email != '' && phone != '') {
+
+          return true;
+        }
+
+        return false;
+
       }
     </script>
 </body>
